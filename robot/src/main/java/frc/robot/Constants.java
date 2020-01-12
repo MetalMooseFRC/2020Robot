@@ -16,4 +16,24 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+    /**DRIVETRAIN */
+
+    //drive motors
+    public static final int frontLeftMotorCANID = 0;
+    public static final int topLeftMotorCANID = 1;
+    public static final int backLeftMotorCANID = 2;
+
+    public static final int frontRightMotorCANID = 3;
+    public static final int topRightMotorCANID = 4;
+    public static final int backRightMotorCANID = 5;
+
+    //solenoid shifter
+    public static final int leftShifterForwardChannel = 0;
+    public static final int leftShifterReverseChannel = 1;
+    public static final int rightShifterForwardChannel = 2;
+    public static final int rightShifterReverseChannel = 3;
+
+    public static final double encoderConversionFactor = 6 * Math.PI;
+    public static final double highGearThreshhold = 10;
+
 }
