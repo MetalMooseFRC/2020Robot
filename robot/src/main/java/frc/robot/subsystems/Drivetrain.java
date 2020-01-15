@@ -67,12 +67,12 @@ public class Drivetrain extends SubsystemBase {
     return rightEncoder.getVelocity();
   }
 
-  public void shiftHighGear() {
+  public void shiftLowGear() {
     leftShifter.set(Value.kReverse);
     rightShifter.set(Value.kReverse);
   }
 
-  public void shiftLowGear() {
+  public void shiftHighGear() {
     leftShifter.set(Value.kForward);
     rightShifter.set(Value.kForward);
   }

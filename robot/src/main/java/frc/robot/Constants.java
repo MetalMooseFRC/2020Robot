@@ -22,13 +22,13 @@ public final class Constants {
     /**Drivetrain */
 
     //drive motors
-    public static final int frontLeftMotorCANID = 0;
-    public static final int topLeftMotorCANID = 1;
-    public static final int backLeftMotorCANID = 2;
+    public static final int frontLeftMotorCANID = 1;
+    public static final int topLeftMotorCANID = 2;
+    public static final int backLeftMotorCANID = 3;
 
-    public static final int frontRightMotorCANID = 3;
-    public static final int topRightMotorCANID = 4;
-    public static final int backRightMotorCANID = 5;
+    public static final int frontRightMotorCANID = 4;
+    public static final int topRightMotorCANID = 5;
+    public static final int backRightMotorCANID = 6;
 
     //solenoid shifter
     public static final int leftShifterForwardChannel = 0;

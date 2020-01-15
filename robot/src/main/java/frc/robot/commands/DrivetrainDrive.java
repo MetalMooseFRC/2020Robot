@@ -3,6 +3,7 @@ package frc.robot.commands;
 import java.util.function.DoubleSupplier;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.Drivetrain;
 
 public class DrivetrainDrive extends CommandBase {
@@ -21,6 +22,13 @@ private DoubleSupplier turn;
     @Override
     public void execute() {
         m_drive.arcadeDrive(speed.getAsDouble(), turn.getAsDouble());
+
+        //automatic gear shifting
+        if ((m_drive.getLeftSpeed() + m_drive.getRightSpeed())/2 > Constants.highGearThreshhold) {
+            m_drive.shiftHighGear();
+        } else {
+            m_drive.shiftLowGear();
+        }
 
     }
 }
