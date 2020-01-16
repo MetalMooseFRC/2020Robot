@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
@@ -14,7 +15,12 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -42,10 +48,15 @@ public class Drivetrain extends SubsystemBase {
   private DoubleSolenoid leftShifter = new DoubleSolenoid(Constants.leftShifterForwardChannel, Constants.leftShifterReverseChannel);
   private DoubleSolenoid rightShifter = new DoubleSolenoid(Constants.rightShifterForwardChannel, Constants.rightShifterReverseChannel);
 
+  //gyro
+  private AHRS navx = new AHRS(Port.kMXP);
+
+  //odometry for path generator
+  private DifferentialDriveOdometry driveOdometry;
+
   public Drivetrain() {
     //reset encoders on startup
-    leftEncoder.setPosition(0);
-    rightEncoder.setPosition(0);
+    resetEncoders();
 
     //set conversion factors
     leftEncoder.setPositionConversionFactor(Constants.encoderConversionFactor);
@@ -53,10 +64,54 @@ public class Drivetrain extends SubsystemBase {
 
     rightEncoder.setPositionConversionFactor(Constants.encoderConversionFactor);
     rightEncoder.setVelocityConversionFactor(Constants.encoderConversionFactor);
+
+    driveOdometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getHeading()));
   }
+
+  @Override
+  public void periodic() {
+    // This method will be called once per scheduler run
+    driveOdometry.update(Rotation2d.fromDegrees(getHeading()), getLeftSpeed(), getRightSpeed());
+  }
+
+ /* Drive methods*/
 
   public void arcadeDrive(double speed, double turn) {
     drive.arcadeDrive(speed, turn);
+  }
+
+  public void tankDriveVolts(double leftVolts, double rightVolts) {
+    leftMotors.setVoltage(leftVolts);
+    rightMotors.setVoltage(-rightVolts);
+  }
+
+  /** Odometry methods */
+
+  public Pose2d getPose() {
+    return driveOdometry.getPoseMeters();
+  }
+
+  public DifferentialDriveWheelSpeeds getWheelSpeeds() {
+    return new DifferentialDriveWheelSpeeds(getLeftSpeed(), getRightSpeed());
+  }
+
+  public void resetOdometry(Pose2d pose) {
+    resetEncoders();
+    driveOdometry.resetPosition(pose, Rotation2d.fromDegrees(getHeading()));
+  }
+
+  /** Encoder methods */
+
+  public double getLeftEncoder() {
+    return leftEncoder.getPosition();
+  }
+
+  public double getRightEncoder() {
+    return rightEncoder.getPosition();
+  }
+
+  public double getAverageEncoder() {
+    return (leftEncoder.getPosition() + rightEncoder.getPosition())/ 2;
   }
 
   public double getLeftSpeed() {
@@ -66,6 +121,13 @@ public class Drivetrain extends SubsystemBase {
   public double getRightSpeed() {
     return rightEncoder.getVelocity();
   }
+
+  public void resetEncoders() {
+    leftEncoder.setPosition(0);
+    rightEncoder.setPosition(0);
+  }
+
+  /** Solenoid methods */
 
   public void shiftLowGear() {
     leftShifter.set(Value.kReverse);
@@ -77,8 +139,13 @@ public class Drivetrain extends SubsystemBase {
     rightShifter.set(Value.kForward);
   }
 
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
+  /** Gyro methods */
+
+  public double getHeading() {
+    return navx.getAngle() % 360;
+  }
+
+  public void resetHeading() {
+    navx.reset();
   }
 }

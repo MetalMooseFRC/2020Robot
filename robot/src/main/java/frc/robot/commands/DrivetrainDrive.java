@@ -23,12 +23,12 @@ private DoubleSupplier turn;
     public void execute() {
         m_drive.arcadeDrive(speed.getAsDouble(), turn.getAsDouble());
 
-        //automatic gear shifting
+        /**automatic gear shifting
         if ((m_drive.getLeftSpeed() + m_drive.getRightSpeed())/2 > Constants.highGearThreshhold) {
             m_drive.shiftHighGear();
         } else {
             m_drive.shiftLowGear();
-        }
+        } */
 
     }
 }

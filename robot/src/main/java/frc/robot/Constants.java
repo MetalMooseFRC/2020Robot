@@ -36,6 +36,7 @@ public final class Constants {
     public static final int rightShifterForwardChannel = 2;
     public static final int rightShifterReverseChannel = 3;
 
+    //should be in meters
     public static final double encoderConversionFactor = 6 * Math.PI;
     public static final double highGearThreshhold = 10;
 
