@@ -30,14 +30,14 @@ public class Drivetrain extends SubsystemBase {
   private CANSparkMax frontLeftMotor = new CANSparkMax(Constants.frontLeftMotorCANID, MotorType.kBrushless);
   private CANSparkMax topLeftMotor = new CANSparkMax(Constants.topLeftMotorCANID, MotorType.kBrushless);
   private CANSparkMax backLeftMotor = new CANSparkMax(Constants.backLeftMotorCANID, MotorType.kBrushless);
-  private SpeedControllerGroup leftMotors = new SpeedControllerGroup(topLeftMotor, frontLeftMotor, backLeftMotor); 
+  //private SpeedControllerGroup leftMotors = new SpeedControllerGroup(topLeftMotor, frontLeftMotor, backLeftMotor); 
 
   private CANSparkMax frontRightMotor = new CANSparkMax(Constants.frontRightMotorCANID, MotorType.kBrushless);
   private CANSparkMax topRightMotor = new CANSparkMax(Constants.topRightMotorCANID, MotorType.kBrushless);
   private CANSparkMax backRightMotor = new CANSparkMax(Constants.backRightMotorCANID, MotorType.kBrushless);
-  private SpeedControllerGroup rightMotors = new SpeedControllerGroup(topRightMotor, frontRightMotor, backRightMotor); 
+ // private SpeedControllerGroup rightMotors = new SpeedControllerGroup(topRightMotor, frontRightMotor, backRightMotor); 
 
-  private DifferentialDrive drive = new DifferentialDrive(leftMotors, rightMotors);
+  private DifferentialDrive drive = new DifferentialDrive(frontLeftMotor, frontRightMotor);
 
   //encoders
   private CANEncoder leftEncoder = new CANEncoder(frontLeftMotor);
@@ -45,8 +45,8 @@ public class Drivetrain extends SubsystemBase {
 
 
   //Gearbox shifting solenoids
-  private DoubleSolenoid leftShifter = new DoubleSolenoid(Constants.leftShifterForwardChannel, Constants.leftShifterReverseChannel);
-  private DoubleSolenoid rightShifter = new DoubleSolenoid(Constants.rightShifterForwardChannel, Constants.rightShifterReverseChannel);
+  //private DoubleSolenoid leftShifter = new DoubleSolenoid(Constants.leftShifterForwardChannel, Constants.leftShifterReverseChannel);
+  //private DoubleSolenoid rightShifter = new DoubleSolenoid(Constants.rightShifterForwardChannel, Constants.rightShifterReverseChannel);
 
   //gyro
   private AHRS navx = new AHRS(Port.kMXP);
@@ -65,6 +65,14 @@ public class Drivetrain extends SubsystemBase {
     rightEncoder.setPositionConversionFactor(Constants.encoderConversionFactor);
     rightEncoder.setVelocityConversionFactor(Constants.encoderConversionFactor);
 
+    //group motor controllers
+    topRightMotor.follow(frontRightMotor);
+    backRightMotor.follow(frontRightMotor);
+
+    topLeftMotor.follow(frontLeftMotor);
+    backLeftMotor.follow(frontLeftMotor);
+
+
     driveOdometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getHeading()));
   }
 
@@ -81,8 +89,8 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public void tankDriveVolts(double leftVolts, double rightVolts) {
-    leftMotors.setVoltage(leftVolts);
-    rightMotors.setVoltage(-rightVolts);
+    frontLeftMotor.setVoltage(leftVolts);
+    frontRightMotor.setVoltage(-rightVolts);
   }
 
   /** Odometry methods */
@@ -127,7 +135,7 @@ public class Drivetrain extends SubsystemBase {
     rightEncoder.setPosition(0);
   }
 
-  /** Solenoid methods */
+  /** Solenoid methods 
 
   public void shiftLowGear() {
     leftShifter.set(Value.kReverse);
@@ -137,7 +145,7 @@ public class Drivetrain extends SubsystemBase {
   public void shiftHighGear() {
     leftShifter.set(Value.kForward);
     rightShifter.set(Value.kForward);
-  }
+  } */
 
   /** Gyro methods */
 

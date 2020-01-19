@@ -35,7 +35,7 @@ public class RobotContainer {
     configureButtonBindings();
 
     m_drivetrain.setDefaultCommand(new DrivetrainDrive(
-      () -> driverStick.getX(), 
+      () -> -driverStick.getY(), 
       () -> driverStick.getZ(), 
       m_drivetrain));
   }
