@@ -40,4 +40,14 @@ public final class Constants {
     public static final double encoderConversionFactor = 6 * Math.PI;
     public static final double highGearThreshhold = 10;
 
+    /** Shooter */
+
+    //shooter motor
+    public static final int shooterMotorCANID = 7;
+
+    /** Limelight */
+
+    //distance calculation factors should be in inches
+    public static final double limelightHeight = 16;
+    public static final double targetHeight = 89.75;
 }
