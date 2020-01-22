@@ -12,8 +12,9 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.commands.DrivetrainDrive;
-import frc.robot.subsystems.Drivetrain;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.*;
+import frc.robot.subsystems.*;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -24,8 +25,8 @@ import frc.robot.subsystems.Drivetrain;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private static final Joystick driverStick = new Joystick(Constants.driverStickPort);
-
   private Drivetrain m_drivetrain = new Drivetrain();
+  private Limelight m_limelight = new Limelight();
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
@@ -34,8 +35,8 @@ public class RobotContainer {
     configureButtonBindings();
 
     m_drivetrain.setDefaultCommand(new DrivetrainDrive(
-      () -> -driverStick.getY(), 
-      () -> driverStick.getZ(), 
+      () -> -driverStick.getY() * Constants.joystickSpeedConstant, 
+      () -> driverStick.getZ() * Constants.joystickTurnConstant, 
       m_drivetrain));
   }
 
@@ -46,6 +47,8 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    new JoystickButton(driverStick, 2)
+    .whenHeld(new DrivetrainTarget(m_drivetrain, m_limelight));
   }
 
 

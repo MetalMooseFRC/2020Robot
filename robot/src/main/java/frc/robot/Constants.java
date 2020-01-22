@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.util.Units;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants.  This class should not be used for any other purpose.  All constants should be
@@ -18,6 +20,10 @@ package frc.robot;
 public final class Constants {
     /**Control System */
     public static final int driverStickPort = 0;
+    
+    //control and sensitivity constants
+    public static final double joystickSpeedConstant = 1;
+    public static final double joystickTurnConstant = 1;
     
     /**Drivetrain */
 
@@ -36,8 +42,10 @@ public final class Constants {
     public static final int rightShifterForwardChannel = 2;
     public static final int rightShifterReverseChannel = 3;
 
-    //should be in meters
-    public static final double encoderConversionFactor = 6 * Math.PI;
+    //drivetrain measurements and conversions
+    public static final double drivetrainWidth = Units.inchesToMeters(29);
+    //public static final double maxWheelSpeed = Units.inchesToMeters(6 * Math.PI);
+    public static final double encoderConversionFactor = Units.inchesToMeters(6 * Math.PI);
     public static final double highGearThreshhold = 10;
 
     /** Shooter */

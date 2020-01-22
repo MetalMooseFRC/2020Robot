@@ -19,6 +19,8 @@ import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.kinematics.ChassisSpeeds;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -30,14 +32,12 @@ public class Drivetrain extends SubsystemBase {
   private CANSparkMax frontLeftMotor = new CANSparkMax(Constants.frontLeftMotorCANID, MotorType.kBrushless);
   private CANSparkMax topLeftMotor = new CANSparkMax(Constants.topLeftMotorCANID, MotorType.kBrushless);
   private CANSparkMax backLeftMotor = new CANSparkMax(Constants.backLeftMotorCANID, MotorType.kBrushless);
-  //private SpeedControllerGroup leftMotors = new SpeedControllerGroup(topLeftMotor, frontLeftMotor, backLeftMotor); 
 
   private CANSparkMax frontRightMotor = new CANSparkMax(Constants.frontRightMotorCANID, MotorType.kBrushless);
   private CANSparkMax topRightMotor = new CANSparkMax(Constants.topRightMotorCANID, MotorType.kBrushless);
   private CANSparkMax backRightMotor = new CANSparkMax(Constants.backRightMotorCANID, MotorType.kBrushless);
- // private SpeedControllerGroup rightMotors = new SpeedControllerGroup(topRightMotor, frontRightMotor, backRightMotor); 
 
-  private DifferentialDrive drive = new DifferentialDrive(frontLeftMotor, frontRightMotor);
+  private DifferentialDriveKinematics driveKinematics = new DifferentialDriveKinematics(Constants.drivetrainWidth);
 
   //encoders
   private CANEncoder leftEncoder = new CANEncoder(frontLeftMotor);
@@ -85,7 +85,16 @@ public class Drivetrain extends SubsystemBase {
  /* Drive methods*/
 
   public void arcadeDrive(double speed, double turn) {
-    drive.arcadeDrive(speed, turn);
+    ChassisSpeeds chassisSpeeds = new ChassisSpeeds(speed, 0, turn);
+
+    //calculate wheel speeds
+    DifferentialDriveWheelSpeeds wheelSpeeds = driveKinematics.toWheelSpeeds(chassisSpeeds);
+    //keep output between -1 and 1
+    wheelSpeeds.normalize(0);
+
+    //output speeds
+    frontLeftMotor.set(wheelSpeeds.leftMetersPerSecond);
+    frontRightMotor.set(wheelSpeeds.rightMetersPerSecond);    
   }
 
   public void tankDriveVolts(double leftVolts, double rightVolts) {
