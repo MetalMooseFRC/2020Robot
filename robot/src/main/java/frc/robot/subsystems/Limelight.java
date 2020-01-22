@@ -15,11 +15,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Limelight extends SubsystemBase {
-  private NetworkTable limelight = NetworkTableInstance.getDefault().getTable("limelight");
-  
-  private NetworkTableEntry tv = limelight.getEntry("tv");
-  private NetworkTableEntry tx = limelight.getEntry("tx");
-  private NetworkTableEntry ty = limelight.getEntry("ty");
+  NetworkTable limelight = NetworkTableInstance.getDefault().getTable("limelight");
 
   public Limelight() {
   }
@@ -27,18 +23,19 @@ public class Limelight extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    
   }
 
   public double getTx() {
-      return tx.getDouble(0.0);
+      return limelight.getEntry("tx").getDouble(0.0);
   }
 
   public double getTy() {
-    return ty.getDouble(0.0); 
+    return limelight.getEntry("ty").getDouble(0.0); 
   }
 
   public boolean hasValidTarget() {
-    return tv.getDouble(0.0) == 1;
+    return limelight.getEntry("tv").getDouble(0.0) == 1;
   }
 
   public double getDistance() {

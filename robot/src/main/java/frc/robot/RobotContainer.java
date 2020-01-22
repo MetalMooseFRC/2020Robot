@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.PrintCommand;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
@@ -25,8 +27,10 @@ import frc.robot.subsystems.*;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private static final Joystick driverStick = new Joystick(Constants.driverStickPort);
+
   private Drivetrain m_drivetrain = new Drivetrain();
   private Limelight m_limelight = new Limelight();
+  private ColorSensor m_colorsensor = new ColorSensor();
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
@@ -36,7 +40,7 @@ public class RobotContainer {
 
     m_drivetrain.setDefaultCommand(new DrivetrainDrive(
       () -> -driverStick.getY() * Constants.joystickSpeedConstant, 
-      () -> driverStick.getZ() * Constants.joystickTurnConstant, 
+      () -> -driverStick.getZ() * Constants.joystickTurnConstant, 
       m_drivetrain));
   }
 
@@ -49,6 +53,9 @@ public class RobotContainer {
   private void configureButtonBindings() {
     new JoystickButton(driverStick, 2)
     .whenHeld(new DrivetrainTarget(m_drivetrain, m_limelight));
+
+    new JoystickButton(driverStick, 1)
+    .whileHeld(new RunCommand(m_colorsensor::getColorChar, m_colorsensor));
   }
 
 

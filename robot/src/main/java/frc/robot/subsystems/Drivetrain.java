@@ -90,11 +90,11 @@ public class Drivetrain extends SubsystemBase {
     //calculate wheel speeds
     DifferentialDriveWheelSpeeds wheelSpeeds = driveKinematics.toWheelSpeeds(chassisSpeeds);
     //keep output between -1 and 1
-    wheelSpeeds.normalize(0);
+    wheelSpeeds.normalize(1);
 
     //output speeds
     frontLeftMotor.set(wheelSpeeds.leftMetersPerSecond);
-    frontRightMotor.set(wheelSpeeds.rightMetersPerSecond);    
+    frontRightMotor.set(-wheelSpeeds.rightMetersPerSecond);    
   }
 
   public void tankDriveVolts(double leftVolts, double rightVolts) {

@@ -16,9 +16,9 @@ import frc.robot.Constants;
 
 public class Shooter extends SubsystemBase {
 
-  private CANSparkMax shooterMotor = new CANSparkMax(Constants.shooterMotorCANID,MotorType.kBrushless);
+  //private CANSparkMax shooterMotor = new CANSparkMax(Constants.shooterMotorCANID,MotorType.kBrushless);
 
-  private CANEncoder shooterEncoder = new CANEncoder(shooterMotor);
+  //private CANEncoder shooterEncoder = new CANEncoder(shooterMotor);
 
 
   public Shooter() {
@@ -31,19 +31,19 @@ public class Shooter extends SubsystemBase {
   }
 
   public void resetEncoder() {
-      shooterEncoder.setPosition(0);
+      //shooterEncoder.setPosition(0);
   }
 
   public void getSpeed() {
-      shooterEncoder.getVelocity();
+     // shooterEncoder.getVelocity();
   }
 
   public void setVoltage(double volts) {
-      shooterMotor.setVoltage(volts);
+     // shooterMotor.setVoltage(volts);
   }
 
   public void setSpeed(double speed) {
-    shooterMotor.set(speed);
+    //shooterMotor.set(speed);
   }
 
 

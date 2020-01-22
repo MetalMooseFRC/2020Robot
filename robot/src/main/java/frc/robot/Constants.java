@@ -23,7 +23,7 @@ public final class Constants {
     
     //control and sensitivity constants
     public static final double joystickSpeedConstant = 1;
-    public static final double joystickTurnConstant = 1;
+    public static final double joystickTurnConstant = 1.3;
     
     /**Drivetrain */
 
@@ -44,7 +44,7 @@ public final class Constants {
 
     //drivetrain measurements and conversions
     public static final double drivetrainWidth = Units.inchesToMeters(29);
-    //public static final double maxWheelSpeed = Units.inchesToMeters(6 * Math.PI);
+
     public static final double encoderConversionFactor = Units.inchesToMeters(6 * Math.PI);
     public static final double highGearThreshhold = 10;
 
@@ -56,6 +56,6 @@ public final class Constants {
     /** Limelight */
 
     //distance calculation factors should be in inches
-    public static final double limelightHeight = 16;
+    public static final double limelightHeight = 13.5;
     public static final double targetHeight = 89.75;
 }

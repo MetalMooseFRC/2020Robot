@@ -9,7 +9,7 @@ public class DrivetrainTarget extends CommandBase {
 private final Drivetrain m_drive;
 private final Limelight m_limelight;
 
-private final double testP = 0.1;
+private final double testP = -0.02;
 
     public DrivetrainTarget(Drivetrain m_drive, Limelight m_limelight) {
         this.m_drive = m_drive;
@@ -18,6 +18,9 @@ private final double testP = 0.1;
 
     @Override
     public void execute() {
+        //System.out.println("tv " + m_limelight.hasValidTarget());
+        //System.out.println("tx " + m_limelight.getTx());
+
         if (m_limelight.hasValidTarget()) m_drive.arcadeDrive(0, m_limelight.getTx() * testP);
 
         System.out.println("Calculated distance: " + m_limelight.getDistance());
