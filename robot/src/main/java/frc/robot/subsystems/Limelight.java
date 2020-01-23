@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Limelight extends SubsystemBase {
+  //initialize the limeligh network table
   NetworkTable limelight = NetworkTableInstance.getDefault().getTable("limelight");
 
   public Limelight() {
@@ -26,18 +27,22 @@ public class Limelight extends SubsystemBase {
     
   }
 
+  //get the x error between the crosshair and target
   public double getTx() {
       return limelight.getEntry("tx").getDouble(0.0);
   }
 
+  //get the y error between the crosshair and target
   public double getTy() {
     return limelight.getEntry("ty").getDouble(0.0); 
   }
 
+  //does the limelight see a viable target
   public boolean hasValidTarget() {
     return limelight.getEntry("tv").getDouble(0.0) == 1;
   }
 
+  //calculate the distance based on trig
   public double getDistance() {
       return (Constants.targetHeight - Constants.limelightHeight)/Math.tan(getTy());
   }

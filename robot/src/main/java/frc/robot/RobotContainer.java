@@ -38,9 +38,10 @@ public class RobotContainer {
     // Configure the button bindings
     configureButtonBindings();
 
+    //drive based on joystick axis and customizable sensitivity constants
     m_drivetrain.setDefaultCommand(new DrivetrainDrive(
-      () -> -driverStick.getY() * Constants.joystickSpeedConstant, 
-      () -> -driverStick.getZ() * Constants.joystickTurnConstant, 
+      () -> applyJoystickDeadBand(-driverStick.getY()) * Constants.joystickSpeedConstant, 
+      () -> applyJoystickDeadBand(-driverStick.getZ()) * Constants.joystickTurnConstant, 
       m_drivetrain));
   }
 
@@ -51,6 +52,7 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    //the following commands are only tests
     new JoystickButton(driverStick, 2)
     .whenHeld(new DrivetrainTarget(m_drivetrain, m_limelight));
 
@@ -67,5 +69,15 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
     return new InstantCommand();
+  }
+
+  //allow for dead areas on the joystick
+  public double applyJoystickDeadBand(double originalValue) {
+    //zero small inputs
+    if (Math.abs(originalValue) < Constants.minimumJoystickInput) return 0;
+
+    //scale larger inputs to maintain smoothness
+    if (originalValue < 0) return originalValue + Constants.minimumJoystickInput;
+    return originalValue - Constants.minimumJoystickInput;
   }
 }

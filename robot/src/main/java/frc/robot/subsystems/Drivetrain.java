@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.SPI.Port;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.ChassisSpeeds;
@@ -37,6 +36,7 @@ public class Drivetrain extends SubsystemBase {
   private CANSparkMax topRightMotor = new CANSparkMax(Constants.topRightMotorCANID, MotorType.kBrushless);
   private CANSparkMax backRightMotor = new CANSparkMax(Constants.backRightMotorCANID, MotorType.kBrushless);
 
+  //kinematics to convert chassis speeds to wheel speeds
   private DifferentialDriveKinematics driveKinematics = new DifferentialDriveKinematics(Constants.drivetrainWidth);
 
   //encoders
@@ -72,7 +72,7 @@ public class Drivetrain extends SubsystemBase {
     topLeftMotor.follow(frontLeftMotor);
     backLeftMotor.follow(frontLeftMotor);
 
-
+    //initialize odometry
     driveOdometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getHeading()));
   }
 
@@ -84,6 +84,7 @@ public class Drivetrain extends SubsystemBase {
 
  /* Drive methods*/
 
+ //use kinematics to calculate wheel speeds
   public void arcadeDrive(double speed, double turn) {
     ChassisSpeeds chassisSpeeds = new ChassisSpeeds(speed, 0, turn);
 
@@ -97,6 +98,7 @@ public class Drivetrain extends SubsystemBase {
     frontRightMotor.set(-wheelSpeeds.rightMetersPerSecond);    
   }
 
+  //control wheels directly through voltage supply
   public void tankDriveVolts(double leftVolts, double rightVolts) {
     frontLeftMotor.setVoltage(leftVolts);
     frontRightMotor.setVoltage(-rightVolts);
@@ -104,14 +106,17 @@ public class Drivetrain extends SubsystemBase {
 
   /** Odometry methods */
 
+  //get position coordinates of robot
   public Pose2d getPose() {
     return driveOdometry.getPoseMeters();
   }
 
+  //Get the individual wheel speeds for the robot
   public DifferentialDriveWheelSpeeds getWheelSpeeds() {
     return new DifferentialDriveWheelSpeeds(getLeftSpeed(), getRightSpeed());
   }
 
+  //reset the position and heading for odometry
   public void resetOdometry(Pose2d pose) {
     resetEncoders();
     driveOdometry.resetPosition(pose, Rotation2d.fromDegrees(getHeading()));
@@ -119,26 +124,32 @@ public class Drivetrain extends SubsystemBase {
 
   /** Encoder methods */
 
+  //get left encoder in meters
   public double getLeftEncoder() {
     return leftEncoder.getPosition();
   }
 
+  //get right encoder in meters
   public double getRightEncoder() {
     return rightEncoder.getPosition();
   }
 
-  public double getAverageEncoder() {
-    return (leftEncoder.getPosition() + rightEncoder.getPosition())/ 2;
+  //get average speed between left and right encoders in meters per second
+  public double getAverageSpeed() {
+    return (leftEncoder.getVelocity() + rightEncoder.getVelocity())/ 2;
   }
 
+  //get left speed in meters per second
   public double getLeftSpeed() {
     return leftEncoder.getVelocity();
   }
 
+  //get right speed in meters per second
   public double getRightSpeed() {
     return rightEncoder.getVelocity();
   }
 
+  //zero the encoders
   public void resetEncoders() {
     leftEncoder.setPosition(0);
     rightEncoder.setPosition(0);
@@ -158,10 +169,12 @@ public class Drivetrain extends SubsystemBase {
 
   /** Gyro methods */
 
+  //get angle ranging from 0 to 360
   public double getHeading() {
     return navx.getAngle() % 360;
   }
 
+  //zero heading
   public void resetHeading() {
     navx.reset();
   }

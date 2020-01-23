@@ -22,8 +22,9 @@ public final class Constants {
     public static final int driverStickPort = 0;
     
     //control and sensitivity constants
-    public static final double joystickSpeedConstant = 1;
-    public static final double joystickTurnConstant = 1.3;
+    public static final double joystickSpeedConstant = 1.1;
+    public static final double joystickTurnConstant = 1.35;
+    public static final double minimumJoystickInput = 0.08;
     
     /**Drivetrain */
 
