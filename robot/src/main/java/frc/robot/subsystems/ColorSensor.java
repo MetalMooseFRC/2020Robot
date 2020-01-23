@@ -63,4 +63,13 @@ public class ColorSensor extends SubsystemBase {
     
   }
 
+  public void getCalibrationValues() {
+    //detected color
+    Color likelyColor = colorSensor.getColor();
+
+    System.out.println("R: " + likelyColor.red);
+    System.out.println("G: " + likelyColor.green);
+    System.out.println("B: " + likelyColor.blue);
+  }
+
 }

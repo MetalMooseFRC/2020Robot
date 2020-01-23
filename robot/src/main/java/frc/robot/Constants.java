@@ -22,9 +22,9 @@ public final class Constants {
     public static final int driverStickPort = 0;
     
     //control and sensitivity constants
-    public static final double joystickSpeedConstant = 1.1;
-    public static final double joystickTurnConstant = 1.35;
-    public static final double minimumJoystickInput = 0.08;
+    public static final double joystickSpeedConstant = 1.2;
+    public static final double joystickTurnConstant = 1.4;
+    public static final double minimumJoystickInput = 0.1;
     
     /**Drivetrain */
 
@@ -46,7 +46,7 @@ public final class Constants {
     //drivetrain measurements and conversions
     public static final double drivetrainWidth = Units.inchesToMeters(29);
 
-    public static final double encoderConversionFactor = Units.inchesToMeters(6 * Math.PI);
+    public static final double encoderConversionFactor = Units.inchesToMeters(6 * Math.PI) / 17;
     public static final double highGearThreshhold = 10;
 
     /** Shooter */

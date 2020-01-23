@@ -104,6 +104,19 @@ public class Drivetrain extends SubsystemBase {
     frontRightMotor.setVoltage(-rightVolts);
   }
 
+  //control wheels through meters per second
+  public void tankDriveMetersPerSecond(double leftSpeed, double rightSpeed) {
+    DifferentialDriveWheelSpeeds wheelSpeeds = new DifferentialDriveWheelSpeeds(leftSpeed, rightSpeed);
+    wheelSpeeds.normalize(1);
+
+    frontLeftMotor.set(wheelSpeeds.leftMetersPerSecond);
+    frontRightMotor.set(-wheelSpeeds.rightMetersPerSecond); 
+  }
+
+  public DifferentialDriveKinematics getKinematics() {
+    return driveKinematics;
+  }
+
   /** Odometry methods */
 
   //get position coordinates of robot
