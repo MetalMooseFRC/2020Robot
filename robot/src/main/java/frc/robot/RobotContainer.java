@@ -82,6 +82,7 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
 
+    /** 
     //voltage constraints
     var autoVoltageConstraint =
       new DifferentialDriveVoltageConstraint(
@@ -114,7 +115,9 @@ public class RobotContainer {
         m_drivetrain);
 
         //do trajectory
-        return ramseteCommand.andThen(() -> m_drivetrain.arcadeDrive(0, 0));
+        return ramseteCommand.andThen(() -> m_drivetrain.arcadeDrive(0, 0)); */
+
+        return new InstantCommand();
   }
 
   //allow for dead areas on the joystick

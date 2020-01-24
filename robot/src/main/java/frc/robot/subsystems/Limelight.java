@@ -11,6 +11,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -44,7 +45,7 @@ public class Limelight extends SubsystemBase {
 
   //calculate the distance based on trig
   public double getDistance() {
-      return (Constants.targetHeight - Constants.limelightHeight)/Math.tan(getTy());
+      return (Constants.targetHeight - Constants.limelightHeight)/Math.tan(getTy()*Math.PI/180);
   }
 
 }

@@ -57,6 +57,6 @@ public final class Constants {
     /** Limelight */
 
     //distance calculation factors should be in inches
-    public static final double limelightHeight = 13.5;
-    public static final double targetHeight = 89.75;
+    public static final double limelightHeight = 24.5;
+    public static final double targetHeight = 81;
 }
