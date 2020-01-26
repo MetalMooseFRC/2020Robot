@@ -27,7 +27,7 @@ private final double testP = -0.018;
         if (m_limelight.hasValidTarget()) {
 
          m_drive.arcadeDrive(0, m_limelight.getTx() * testP);
-        System.out.println("tan PI " + Math.tan(m_limelight.getTy()*Math.PI/180));
+         System.out.println("tan PI " + Math.tan(m_limelight.getTy()*Math.PI/180));
          System.out.println("Calculated distance: " + m_limelight.getDistance());
         }
     }

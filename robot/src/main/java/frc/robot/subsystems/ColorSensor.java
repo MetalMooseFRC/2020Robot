@@ -22,10 +22,10 @@ public class ColorSensor extends SubsystemBase {
   private ColorMatch colorMatcher = new ColorMatch();
 
   //example code values for control panel swatches
-  private final Color kBlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
-  private final Color kGreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
-  private final Color kRedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
-  private final Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
+  private static Color kBlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
+  private static Color kGreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
+  private static Color kRedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
+  private static Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
 
   public ColorSensor() {
     //add the target colors to the matching pool

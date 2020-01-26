@@ -42,6 +42,7 @@ public class RobotContainer {
   private static final Joystick driverStick = new Joystick(Constants.driverStickPort);
 
   private Drivetrain m_drivetrain = new Drivetrain();
+  private Intake m_intake = new Intake();
   private Limelight m_limelight = new Limelight();
   private ColorSensor m_colorsensor = new ColorSensor();
   /**

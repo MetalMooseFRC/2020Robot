@@ -46,13 +46,25 @@ public final class Constants {
     //drivetrain measurements and conversions
     public static final double drivetrainWidth = Units.inchesToMeters(29);
 
-    public static final double encoderConversionFactor = Units.inchesToMeters(6 * Math.PI) / 17;
+    public static final double drivetrainEncoderConversionFactor = Units.inchesToMeters(6 * Math.PI) / 17;
     public static final double highGearThreshhold = 10;
+
+    /** Intake */
+    //motor and sensor ports
+    public static final int intakeMotorCANID = 7;
+    public static final int intakeLimitSwitchPort = 0;
+    
+    public static final double intakeMotorAmpLimit = 35;
+
+    public static final double intakeSpeed = -0.4;
+
+    //solenoid
+    public static final int intakeEngagerChannel = 4;
 
     /** Shooter */
 
     //shooter motor
-    public static final int shooterMotorCANID = 7;
+    public static final int shooterMotorCANID = 8;
 
     /** Limelight */
 

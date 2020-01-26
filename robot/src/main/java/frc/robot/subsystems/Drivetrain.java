@@ -59,11 +59,11 @@ public class Drivetrain extends SubsystemBase {
     resetEncoders();
 
     //set conversion factors
-    leftEncoder.setPositionConversionFactor(Constants.encoderConversionFactor);
-    leftEncoder.setVelocityConversionFactor(Constants.encoderConversionFactor);
+    leftEncoder.setPositionConversionFactor(Constants.drivetrainEncoderConversionFactor);
+    leftEncoder.setVelocityConversionFactor(Constants.drivetrainEncoderConversionFactor);
 
-    rightEncoder.setPositionConversionFactor(Constants.encoderConversionFactor);
-    rightEncoder.setVelocityConversionFactor(Constants.encoderConversionFactor);
+    rightEncoder.setPositionConversionFactor(Constants.drivetrainEncoderConversionFactor);
+    rightEncoder.setVelocityConversionFactor(Constants.drivetrainEncoderConversionFactor);
 
     //group motor controllers
     topRightMotor.follow(frontRightMotor);
