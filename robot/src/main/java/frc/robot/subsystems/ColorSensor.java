@@ -21,18 +21,14 @@ public class ColorSensor extends SubsystemBase {
   private ColorSensorV3 colorSensor = new ColorSensorV3(Port.kOnboard);
   private ColorMatch colorMatcher = new ColorMatch();
 
-  //example code values for control panel swatches
-  private static Color kBlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
-  private static Color kGreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
-  private static Color kRedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
-  private static Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
+
 
   public ColorSensor() {
     //add the target colors to the matching pool
-    colorMatcher.addColorMatch(kBlueTarget);
-    colorMatcher.addColorMatch(kGreenTarget);
-    colorMatcher.addColorMatch(kRedTarget);
-    colorMatcher.addColorMatch(kYellowTarget);
+    colorMatcher.addColorMatch(Constants.kBlueTarget);
+    colorMatcher.addColorMatch(Constants.kGreenTarget);
+    colorMatcher.addColorMatch(Constants.kRedTarget);
+    colorMatcher.addColorMatch(Constants.kYellowTarget);
   }
 
   @Override
@@ -40,6 +36,7 @@ public class ColorSensor extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
+  //return the char of the detected color to compare to FMS data
   public char getColorChar() {
     //get detected color from sensor
     Color likelyColor = colorSensor.getColor();
@@ -47,15 +44,15 @@ public class ColorSensor extends SubsystemBase {
     ColorMatchResult result = colorMatcher.matchClosestColor(likelyColor);
 
     //return the appropriate character
-    if (result.color == kBlueTarget) {
+    if (result.color == Constants.kBlueTarget) {
         System.out.println("B");
         return 'B';
-    } else if (result.color == kGreenTarget) {
+    } else if (result.color == Constants.kGreenTarget) {
         System.out.println("G");
         return 'G';
-    } else if (result.color == kRedTarget) {
+    } else if (result.color == Constants.kRedTarget) {
         System.out.println("R");
-    } else if (result.color == kYellowTarget) {
+    } else if (result.color == Constants.kYellowTarget) {
         System.out.println("Y");
     } 
 
@@ -63,10 +60,12 @@ public class ColorSensor extends SubsystemBase {
     
   }
 
+  //print the raw rgb values of detected color
   public void getCalibrationValues() {
     //detected color
     Color likelyColor = colorSensor.getColor();
 
+    //print Color class rgb values
     System.out.println("R: " + likelyColor.red);
     System.out.println("G: " + likelyColor.green);
     System.out.println("B: " + likelyColor.blue);

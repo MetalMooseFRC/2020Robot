@@ -20,6 +20,7 @@ public class Intake extends SubsystemBase {
     //CANSparkMax intakeMotor = new CANSparkMax(Constants.intakeMotorCANID, MotorType.kBrushless);
     DigitalInput limitSwitch = new DigitalInput(Constants.intakeLimitSwitchPort);
 
+    //solenoid for moving ball to shooter
    // Solenoid engagerSolenoid = new Solenoid(Constants.intakeEngagerChannel);
 
 
@@ -34,20 +35,25 @@ public class Intake extends SubsystemBase {
 
   /**Motor methods */
 
+  //intake balls at a default speed
   public void intake() {
       //intakeMotor.set(Constants.intakeSpeed);
   }
 
+  //set the speed of the intake
   public void setSpeed(double speed) {
       //intakeMotor.set(speed);
   }
 
+  //get the amp draw
   public double getCurrentDraw() {
       //return intakeMotor.getOutputCurrent();
       return 0;
   }
 
   /**Ball management methods */
+  
+  //is the 5th ball detector pressed
   public boolean isLimitPressed() {
       return limitSwitch.get();
   }

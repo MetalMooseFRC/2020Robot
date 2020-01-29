@@ -30,18 +30,22 @@ public class Shooter extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
+  //reset encoders to 0
   public void resetEncoder() {
       //shooterEncoder.setPosition(0);
   }
 
+  //get the speed in rpm
   public void getSpeed() {
      // shooterEncoder.getVelocity();
   }
 
+  //set the voltage of the motor
   public void setVoltage(double volts) {
      // shooterMotor.setVoltage(volts);
   }
 
+  //set the speed of the motor (-1 to 1)
   public void setSpeed(double speed) {
     //shooterMotor.set(speed);
   }

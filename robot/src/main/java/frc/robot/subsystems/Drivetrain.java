@@ -55,6 +55,7 @@ public class Drivetrain extends SubsystemBase {
   private DifferentialDriveOdometry driveOdometry;
 
   public Drivetrain() {
+    resetHeading();
     //reset encoders on startup
     resetEncoders();
 
@@ -80,6 +81,8 @@ public class Drivetrain extends SubsystemBase {
   public void periodic() {
     // This method will be called once per scheduler run
     driveOdometry.update(Rotation2d.fromDegrees(getHeading()), getLeftSpeed(), getRightSpeed());
+
+    System.out.println("Yaw " + getHeading());
   }
 
  /* Drive methods*/
@@ -147,6 +150,12 @@ public class Drivetrain extends SubsystemBase {
     return rightEncoder.getPosition();
   }
 
+  
+  //get average distance between left and right encoders in meters
+  public double getAverageDistance() {
+    return (leftEncoder.getPosition() + rightEncoder.getPosition())/ 2;
+  }
+
   //get average speed between left and right encoders in meters per second
   public double getAverageSpeed() {
     return (leftEncoder.getVelocity() + rightEncoder.getVelocity())/ 2;
@@ -184,7 +193,7 @@ public class Drivetrain extends SubsystemBase {
 
   //get angle ranging from 0 to 360
   public double getHeading() {
-    return navx.getAngle() % 360;
+    return navx.getYaw();
   }
 
   //zero heading

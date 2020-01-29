@@ -9,7 +9,6 @@ package frc.robot;
 
 import java.util.List;
 
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.controller.PIDController;
@@ -31,12 +30,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 
-/**
- * This class is where the bulk of the robot should be declared.  Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls).  Instead, the structure of the robot
- * (including subsystems, commands, and button mappings) should be declared here.
- */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private static final Joystick driverStick = new Joystick(Constants.driverStickPort);
@@ -45,9 +38,8 @@ public class RobotContainer {
   private Intake m_intake = new Intake();
   private Limelight m_limelight = new Limelight();
   private ColorSensor m_colorsensor = new ColorSensor();
-  /**
-   * The container for the robot.  Contains subsystems, OI devices, and commands.
-   */
+
+
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
@@ -59,12 +51,6 @@ public class RobotContainer {
       m_drivetrain));
   }
 
-  /**
-   * Use this method to define your button->command mappings.  Buttons can be created by
-   * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
-   * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
-   */
   private void configureButtonBindings() {
     //the following commands are only tests
     new JoystickButton(driverStick, 2)
@@ -74,12 +60,6 @@ public class RobotContainer {
     .whileHeld(new RunCommand(m_colorsensor::getCalibrationValues, m_colorsensor));
   }
 
-
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
 
