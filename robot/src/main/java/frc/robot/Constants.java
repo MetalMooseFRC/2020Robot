@@ -59,7 +59,10 @@ public final class Constants {
     public static final double driveDistanceD = 0;
 
     //allowed PID error in meters
-    public static final double drivePIDErrorMargin = 0.05;
+    public static final double driveDistancePIDErrorMargin = 0.05;
+
+    //allowed PID error in degrees
+    public static final double driveAnglePIDErrorMargin = 2;
 
     //default speed of drivetrain for auto
     public static final double defaultAutoSpeed = 0.6;

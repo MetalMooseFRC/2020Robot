@@ -5,48 +5,38 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Drivetrain;
 
-public class DrivetrainDriveDistance extends CommandBase {
+public class DrivetrainDriveAngle extends CommandBase {
 private final Drivetrain m_drive;
-//in meters
-double distance;
-//on -1 to 1 scale
-double speed;
+//in degrees
+double angle;
+
 
 PIDController drivePID = new PIDController(Constants.driveDistanceP, Constants.driveDistanceI, Constants.driveDistanceD);
 
-    public DrivetrainDriveDistance(double distance, Drivetrain m_subsystem) {
+    public DrivetrainDriveAngle(double angle, Drivetrain m_subsystem) {
         m_drive = m_subsystem;
         addRequirements(m_subsystem);
 
-        this.distance = distance;
-        this.speed = Constants.defaultAutoSpeed;
+        this.angle = angle;
 
-    }
-
-    public DrivetrainDriveDistance(double distance, double speed, Drivetrain m_subsystem) {
-        m_drive = m_subsystem;
-        addRequirements(m_subsystem);
-
-        this.distance = distance;
-        this.speed = speed;
     }
     
     @Override
     public void initialize() {
         //reset the drive encoders
-        m_drive.resetEncoders();
+        m_drive.resetHeading();
     }
 
     @Override
     public void execute() {
         //calculate PID control based on difference between encoders and distance to travel
-        m_drive.arcadeDrive(drivePID.calculate(m_drive.getAverageDistance(), distance), 0);
+        m_drive.arcadeDrive(0, drivePID.calculate(m_drive.getHeading(), angle));
     }
 
     @Override
     public boolean isFinished() {
         //return true when the error is negligible
-        return Math.abs(drivePID.getPositionError()) < Constants.driveDistancePIDErrorMargin;
+        return Math.abs(drivePID.getPositionError()) < Constants.driveAnglePIDErrorMargin;
     }
 
     @Override
