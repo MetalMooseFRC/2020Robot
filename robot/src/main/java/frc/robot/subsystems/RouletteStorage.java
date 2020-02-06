@@ -10,19 +10,17 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class Intake extends SubsystemBase {
+public class RouletteStorage extends SubsystemBase {
+
+  /**  
     //initialize ports
-    //CANSparkMax intakeMotor = new CANSparkMax(Constants.intakeMotorCANID, MotorType.kBrushless);
-    DigitalInput limitSwitch = new DigitalInput(Constants.intakeLimitSwitchPort);
+    CANSparkMax rouletteStorageMotor = new CANSparkMax(Constants.rouletteStorageMotorCANID, MotorType.kBrushless);
+    CANSparkMax preloaderMotor = new CANSparkMax(Constants.preloaderMotorCANID, MotorType.kBrushless);
 
-  
-
-
-  public Intake() {
+  public RouletteStorage() {
 
   }
 
@@ -31,30 +29,24 @@ public class Intake extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  /**Motor methods */
-
-  //intake balls at a default speed
-  public void intake() {
-      //intakeMotor.set(Constants.intakeSpeed);
-  }
+  /**Motor methods 
 
   //set the speed of the intake
   public void setSpeed(double speed) {
-      //intakeMotor.set(speed);
+      rouletteStorageMotor.set(speed);
   }
 
   //get the amp draw
   public double getCurrentDraw() {
-      //return intakeMotor.getOutputCurrent();
-      return 0;
+      return rouletteStorageMotor.getOutputCurrent();
   }
 
-  /**Ball management methods */
-  
-  //is the 5th ball detector pressed
-  public boolean isLimitPressed() {
-      return limitSwitch.get();
+  //preload ball into shooter
+  public void preload() {
+    preloaderMotor.set(Constants.preloadSpeed);
   }
+
+  */
 
 
 }

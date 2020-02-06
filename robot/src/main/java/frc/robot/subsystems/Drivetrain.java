@@ -12,9 +12,6 @@ import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
@@ -42,11 +39,6 @@ public class Drivetrain extends SubsystemBase {
   //encoders
   private CANEncoder leftEncoder = new CANEncoder(frontLeftMotor);
   private CANEncoder rightEncoder = new CANEncoder(frontRightMotor);
-
-
-  //Gearbox shifting solenoids
-  //private DoubleSolenoid leftShifter = new DoubleSolenoid(Constants.leftShifterForwardChannel, Constants.leftShifterReverseChannel);
-  //private DoubleSolenoid rightShifter = new DoubleSolenoid(Constants.rightShifterForwardChannel, Constants.rightShifterReverseChannel);
 
   //gyro
   private AHRS navx = new AHRS(Port.kMXP);
@@ -176,18 +168,6 @@ public class Drivetrain extends SubsystemBase {
     leftEncoder.setPosition(0);
     rightEncoder.setPosition(0);
   }
-
-  /** Solenoid methods 
-
-  public void shiftLowGear() {
-    leftShifter.set(Value.kReverse);
-    rightShifter.set(Value.kReverse);
-  }
-
-  public void shiftHighGear() {
-    leftShifter.set(Value.kForward);
-    rightShifter.set(Value.kForward);
-  } */
 
   /** Gyro methods */
 

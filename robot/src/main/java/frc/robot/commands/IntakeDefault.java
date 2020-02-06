@@ -16,7 +16,7 @@ public class IntakeDefault extends CommandBase {
 
         //only intake if there are less than 5 balls and no jamming
         if (m_intake.isLimitPressed()) {
-            m_intake.setSpeed(0);
+            m_intake.setSpeed(-Constants.intakeSpeed);
         } else if (m_intake.getCurrentDraw() > Constants.intakeMotorAmpLimit) {
             m_intake.setSpeed(-Constants.intakeSpeed);
         } else {

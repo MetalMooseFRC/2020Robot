@@ -39,12 +39,6 @@ public final class Constants {
     public static final int topRightMotorCANID = 5;
     public static final int backRightMotorCANID = 6;
 
-    //solenoid shifter
-    public static final int leftShifterForwardChannel = 0;
-    public static final int leftShifterReverseChannel = 1;
-    public static final int rightShifterForwardChannel = 2;
-    public static final int rightShifterReverseChannel = 3;
-
     //drivetrain measurements and conversions
     public static final double drivetrainWidth = Units.inchesToMeters(29);
 
@@ -82,10 +76,28 @@ public final class Constants {
     //solenoid channel
     public static final int intakeEngagerChannel = 4;
 
-    /** Shooter */
+    /** Roulette Storage */
+    public static final int rouletteStorageMotorCANID = 8;
+    public static final int preloaderMotorCANID = 9;
 
-    //shooter motor
-    public static final int shooterMotorCANID = 8;
+    //default preload speed
+    public static final double preloadSpeed = 0.3;
+
+    /** Shooter */
+    public static final int shooterMotorCANID = 10;
+    public static final int turretMotorCANID = 11;
+    public static final int elevateMotorCANID = 12;
+
+    /** Lift */
+
+    //lifter motors
+    public static final int leftLifterMotorCANID = 13;
+    public static final int rightLifterMotorCANID = 14;
+
+
+    /** Contol Panel */
+    public static final int controlPanelSpinnerCANID = 15;
+
 
     /** Limelight */
 
