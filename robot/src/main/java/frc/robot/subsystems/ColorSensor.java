@@ -11,6 +11,7 @@ import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
 import com.revrobotics.ColorSensorV3;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -36,8 +37,32 @@ public class ColorSensor extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  //return the char of the detected color to compare to FMS data
-  public char getColorChar() {
+  //return the associated integer of the 
+  public int FMSColorCharToNum() {
+    //get FMS data
+    String gameData = DriverStation.getInstance().getGameSpecificMessage();
+
+    //only if the gamedata has been sent
+    if (gameData.length() > 0) {
+    //return the appropriate integer
+    if (gameData == "R") {
+      return 0;
+    } else if (gameData == "Y") {
+      return 1;
+    } else if (gameData  == "B") {
+      return 2;
+    } else if (gameData == "G") {
+      return 3;
+    }
+    }
+
+    //no color gotten
+    return -1;
+    
+  }
+
+  //return the number of the detected color. Enumeration is in order going clockwise
+  public int getColorNum() {
     //get detected color from sensor
     Color likelyColor = colorSensor.getColor();
     //match it to the closest color given the target colors
@@ -45,19 +70,29 @@ public class ColorSensor extends SubsystemBase {
 
     //return the appropriate character
     if (result.color == Constants.kBlueTarget) {
-        System.out.println("B");
-        return 'B';
+        return 2;
     } else if (result.color == Constants.kGreenTarget) {
-        System.out.println("G");
-        return 'G';
+        return 3;
     } else if (result.color == Constants.kRedTarget) {
-        System.out.println("R");
+        return 0;
     } else if (result.color == Constants.kYellowTarget) {
-        System.out.println("Y");
+        return 1;
     } 
 
-    return ' ';
+    //no color gotten
+    return -1;
     
+  }
+
+  public int getDistanceToCorrectPanel() {
+    int neededColor = FMSColorCharToNum();
+    int currentColor = getColorNum();
+
+    //this is in panels. Positive is clockwise
+    int difference = neededColor - (currentColor + Constants.colorDetectionOffset) % 4;
+
+    return difference;
+
   }
 
   //print the raw rgb values of detected color

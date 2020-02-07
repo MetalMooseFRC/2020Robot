@@ -106,6 +106,10 @@ public final class Constants {
     public static final double targetHeight = 81;
 
     /**Color Sensor */
+    //offset of panels between our color detection and the control panel's.
+    //positive indicates that it is x panels moving clockwise from our sensor and the control panel's
+    public static final int colorDetectionOffset = 2;
+    
       //example code values for control panel swatches
     public static Color kBlueTarget = ColorMatch.makeColor(0.143, 0.427, 0.429);
     public static Color kGreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
