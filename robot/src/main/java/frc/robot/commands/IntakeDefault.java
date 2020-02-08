@@ -9,15 +9,14 @@ public class IntakeDefault extends CommandBase {
 
     public IntakeDefault(Intake m_intake) {
         this.m_intake = m_intake;
+        addRequirements(m_intake);
     }
 
     @Override
     public void execute() {
 
         //only intake if there are less than 5 balls and no jamming
-        if (m_intake.isLimitPressed()) {
-            m_intake.setSpeed(-Constants.intakeSpeed);
-        } else if (m_intake.getCurrentDraw() > Constants.intakeMotorAmpLimit) {
+        if (m_intake.isLimitPressed() || m_intake.getCurrentDraw() > Constants.intakeMotorAmpLimit) {
             m_intake.setSpeed(-Constants.intakeSpeed);
         } else {
          m_intake.intake();

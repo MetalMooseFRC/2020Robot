@@ -14,9 +14,9 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-public class Shooter extends SubsystemBase {
+public class Turret extends SubsystemBase {
 
-  /** 
+  
   //shooter wheel motor
   private CANSparkMax shooterMotor = new CANSparkMax(Constants.shooterMotorCANID,MotorType.kBrushless);
   private CANEncoder shooterEncoder = new CANEncoder(shooterMotor);
@@ -29,7 +29,7 @@ public class Shooter extends SubsystemBase {
   private CANSparkMax elevateMotor = new CANSparkMax(Constants.elevateMotorCANID, MotorType.kBrushless);
   private CANEncoder elevateEncoder = new CANEncoder(elevateMotor);
 
-  public Shooter() {
+  public Turret() {
     resetShooterEncoder();
     resetTurretEncoder();
     resetElevateEncoder();
@@ -40,7 +40,7 @@ public class Shooter extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  /** Shooter motor methods  
+  /** Shooter motor methods  */
 
   //reset encoders to 0
   public void resetShooterEncoder() {
@@ -62,7 +62,7 @@ public class Shooter extends SubsystemBase {
     shooterMotor.set(speed);
   }
 
-  /* Turret motor methods 
+  /* Turret motor methods */
 
   //reset turret encoder
   public void resetTurretEncoder() {
@@ -79,7 +79,7 @@ public class Shooter extends SubsystemBase {
     return turretEncoder.getPosition();
   }
 
-    /* Elevate motor methods 
+    /* Elevate motor methods */
 
   //reset elevate encoder
   public void resetElevateEncoder() {
@@ -96,6 +96,6 @@ public class Shooter extends SubsystemBase {
     return elevateEncoder.getPosition();
   }
 
-  */
+
 
 }

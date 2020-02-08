@@ -51,12 +51,8 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    //the following commands are only tests
-    new JoystickButton(driverStick, 2)
-    .whenHeld(new DrivetrainTarget(m_drivetrain, m_limelight));
+    
 
-    new JoystickButton(driverStick, 1)
-    .whileHeld(new RunCommand(m_colorsensor::getCalibrationValues, m_colorsensor));
   }
 
   public Command getAutonomousCommand() {

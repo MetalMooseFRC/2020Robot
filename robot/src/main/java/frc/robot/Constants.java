@@ -83,10 +83,15 @@ public final class Constants {
     //default preload speed
     public static final double preloadSpeed = 0.3;
 
-    /** Shooter */
+    /** Turret */
     public static final int shooterMotorCANID = 10;
     public static final int turretMotorCANID = 11;
     public static final int elevateMotorCANID = 12;
+
+    //soft max limit
+    public static final double maxTurretMotorRotations = 10;
+    //soft min limit
+    public static final double minTurretMotorRotations = -10;
 
     /** Lift */
 
@@ -104,6 +109,9 @@ public final class Constants {
     //distance calculation factors should be in inches
     public static final double limelightHeight = 24.5;
     public static final double targetHeight = 81;
+
+    public static final double limelightErrorMargin = 1;
+    public static final double limelightP = 0.2;
 
     /**Color Sensor */
     //offset of panels between our color detection and the control panel's.

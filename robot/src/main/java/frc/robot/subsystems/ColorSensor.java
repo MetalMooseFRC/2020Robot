@@ -91,6 +91,9 @@ public class ColorSensor extends SubsystemBase {
     //this is in panels. Positive is clockwise
     int difference = neededColor - (currentColor + Constants.colorDetectionOffset) % 4;
 
+    //if difference is 3 we want it to just go back one (colors 3 and 0 would cause this)
+    if (Math.abs(difference) == 3) difference /= -3;
+    
     return difference;
 
   }
