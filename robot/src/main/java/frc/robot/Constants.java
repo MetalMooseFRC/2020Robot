@@ -44,8 +44,6 @@ public final class Constants {
 
     //distance the wheels travel in 1 rotation of neo in meters
     public static final double drivetrainEncoderConversionFactor = Units.inchesToMeters(6 * Math.PI) / 13;
-    //speed at which to switch between gears?
-    public static final double highGearThreshhold = 10;
 
     //distance PID constants
     public static final double driveDistanceP = 0.01;
@@ -54,6 +52,11 @@ public final class Constants {
 
     //allowed PID error in meters
     public static final double driveDistancePIDErrorMargin = 0.05;
+
+    //distance PID constants
+    public static final double driveAngleP = 0.05;
+    public static final double driveAngleI = 0;
+    public static final double driveAngleD = 0;
 
     //allowed PID error in degrees
     public static final double driveAnglePIDErrorMargin = 2;
@@ -103,6 +106,13 @@ public final class Constants {
     /** Contol Panel */
     public static final int controlPanelSpinnerCANID = 15;
 
+    //number of rotations of the neo 550 with 12:1 gearing and 2.25 in wheel for one panel
+    public static final double rotationsPerColorPanel = 200/3;
+
+    //control panel PID constants
+    public static final double controlPanelP = 0.3;
+    public static final double controlPanelI = 0;
+    public static final double controlPanelD = 0;
 
     /** Limelight */
 

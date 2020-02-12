@@ -16,7 +16,7 @@ import frc.robot.Constants;
 
 public class ControlPanelSpinner extends SubsystemBase {
   
-    /** 
+   
     //initialize ports
     CANSparkMax controlPanelSpinnerMotor = new CANSparkMax(Constants.controlPanelSpinnerCANID, MotorType.kBrushless);
     CANEncoder controlPanelSpinnerEncoder = new CANEncoder(controlPanelSpinnerMotor);
@@ -31,7 +31,7 @@ public class ControlPanelSpinner extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  /**Motor methods 
+  /**Motor methods */
 
   //set the speed of the motor
   public void setSpeed(double speed) {
@@ -47,7 +47,7 @@ public class ControlPanelSpinner extends SubsystemBase {
   public double getPosition() {
       return controlPanelSpinnerEncoder.getPosition();
   }
-  */
+  
 
 
 }

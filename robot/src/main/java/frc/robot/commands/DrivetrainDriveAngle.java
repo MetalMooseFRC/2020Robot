@@ -11,7 +11,7 @@ private final Drivetrain m_drive;
 double angle;
 
 
-PIDController drivePID = new PIDController(Constants.driveDistanceP, Constants.driveDistanceI, Constants.driveDistanceD);
+PIDController drivePID = new PIDController(Constants.driveAngleP, Constants.driveAngleI, Constants.driveAngleD);
 
     public DrivetrainDriveAngle(double angle, Drivetrain m_subsystem) {
         m_drive = m_subsystem;
