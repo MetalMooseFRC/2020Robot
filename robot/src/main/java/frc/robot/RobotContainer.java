@@ -34,9 +34,6 @@ public class RobotContainer {
   private static final Joystick driverStick = new Joystick(Constants.driverStickPort);
 
   private Drivetrain m_drivetrain = new Drivetrain();
-  private Intake m_intake = new Intake();
-  private Limelight m_limelight = new Limelight();
-  private ColorSensor m_colorsensor = new ColorSensor();
 
 
   public RobotContainer() {
@@ -57,42 +54,6 @@ public class RobotContainer {
 
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-
-    /** 
-    //voltage constraints
-    var autoVoltageConstraint =
-      new DifferentialDriveVoltageConstraint(
-        new SimpleMotorFeedforward(0.22, 1.98, 0.2),
-        m_drivetrain.getKinematics(),
-        10);
-
-    //confige trajectory
-    TrajectoryConfig config = new TrajectoryConfig(3, 3)
-    .setKinematics(m_drivetrain.getKinematics())
-    .addConstraint(autoVoltageConstraint);
-
-    //generate trajectory of s curve
-    Trajectory exampleTrajectory = TrajectoryGenerator.generateTrajectory(
-      new Pose2d(0,0, new Rotation2d(0)), 
-      List.of(
-        new Translation2d(1, 1),
-        new Translation2d(2, -1)
-      ), 
-      new Pose2d(3,0, new Rotation2d(0)), 
-      config);
-
-      //Start ramsete calculations
-      RamseteCommand ramseteCommand = new RamseteCommand(
-        exampleTrajectory, 
-        m_drivetrain::getPose, 
-        new RamseteController(), 
-        m_drivetrain.getKinematics(), 
-        m_drivetrain::tankDriveMetersPerSecond, 
-        m_drivetrain);
-
-        //do trajectory
-        return ramseteCommand.andThen(() -> m_drivetrain.arcadeDrive(0, 0)); */
-
         return new InstantCommand();
   }
 

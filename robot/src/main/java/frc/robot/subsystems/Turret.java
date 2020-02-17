@@ -48,8 +48,8 @@ public class Turret extends SubsystemBase {
   }
 
   //get the speed in rpm
-  public void getSpeed() {
-     shooterEncoder.getVelocity();
+  public double getSpeed() {
+     return shooterEncoder.getVelocity();
   }
 
   //set the voltage of the motor

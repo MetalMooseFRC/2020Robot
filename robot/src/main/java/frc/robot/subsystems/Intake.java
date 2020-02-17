@@ -16,10 +16,10 @@ import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
     //initialize ports
-    //CANSparkMax intakeMotor = new CANSparkMax(Constants.intakeMotorCANID, MotorType.kBrushless);
+    CANSparkMax intakeMotor = new CANSparkMax(Constants.intakeMotorCANID, MotorType.kBrushless);
     DigitalInput limitSwitch = new DigitalInput(Constants.intakeLimitSwitchPort);
 
-  
+    
 
 
   public Intake() {

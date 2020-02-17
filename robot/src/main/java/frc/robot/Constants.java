@@ -96,6 +96,13 @@ public final class Constants {
     //soft min limit
     public static final double minTurretMotorRotations = -10;
 
+    //shooter speeds in rpm
+    public static final double highGoalShooterSpeed = 200;
+    public static final double lowGoalShooterSpeed = 100;
+
+    //shooter speed margin
+    public static final double shooterSpeedErrorMargin = 1;
+
     /** Lift */
 
     //lifter motors
@@ -113,6 +120,8 @@ public final class Constants {
     public static final double controlPanelP = 0.3;
     public static final double controlPanelI = 0;
     public static final double controlPanelD = 0;
+
+    public static final double controlPanelPIDErrorMargin = 1;
 
     /** Limelight */
 
