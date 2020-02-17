@@ -11,6 +11,8 @@ import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -28,6 +30,9 @@ public class Turret extends SubsystemBase {
   //elevate motor (shooter pitch)
   private CANSparkMax elevateMotor = new CANSparkMax(Constants.elevateMotorCANID, MotorType.kBrushless);
   private CANEncoder elevateEncoder = new CANEncoder(elevateMotor);
+
+  //ball into shooter actuator
+  private DoubleSolenoid shooterEngager = new DoubleSolenoid(Constants.shooterEngagerForwardPort, Constants.shooterEngagerReversePort);
 
   public Turret() {
     resetShooterEncoder();
@@ -96,6 +101,16 @@ public class Turret extends SubsystemBase {
     return elevateEncoder.getPosition();
   }
 
+  /** Engager actuator methods */
 
+  //activate
+  public void engage() {
+    shooterEngager.set(Value.kForward);
+  }
 
+  //deactivate
+  public void disengage() {
+    shooterEngager.set(Value.kReverse);
+  }
+  
 }

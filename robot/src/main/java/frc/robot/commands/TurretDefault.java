@@ -55,7 +55,9 @@ public class TurretDefault extends CommandBase {
             }
 
             if (buttonStatus.getAsBoolean() && Math.abs(m_turret.getSpeed() - Constants.highGoalShooterSpeed) < Constants.shooterSpeedErrorMargin) {
-                //engage shooter and shoot!
+                m_turret.engage();
+            } else {
+                m_turret.disengage();
             }
 
         } else {
@@ -64,6 +66,12 @@ public class TurretDefault extends CommandBase {
 
             m_turret.setElevateSpeed(joystickY.getAsDouble());
             m_turret.setTurretSpeed(joystickX.getAsDouble());
+
+            if (buttonStatus.getAsBoolean()) {
+                m_turret.engage();
+            } else {
+                m_turret.disengage();
+            }
            
         }
 

@@ -17,10 +17,8 @@ import frc.robot.Constants;
 
 public class RouletteStorage extends SubsystemBase {
 
-  
     //initialize ports
     TalonSRX rouletteStorageMotor = new TalonSRX(Constants.rouletteStorageMotorCANID);
-    CANSparkMax preloaderMotor = new CANSparkMax(Constants.preloaderMotorCANID, MotorType.kBrushless);
 
   public RouletteStorage() {
 
@@ -42,13 +40,6 @@ public class RouletteStorage extends SubsystemBase {
   public double getCurrentDraw() {
       return rouletteStorageMotor.getStatorCurrent();
   }
-
-  //preload ball into shooter
-  public void preload() {
-    preloaderMotor.set(Constants.preloadSpeed);
-  }
-
-  
 
 
 }

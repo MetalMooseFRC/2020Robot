@@ -66,30 +66,36 @@ public final class Constants {
 
 
     /** Intake */
-    //motor and sensor ports
+    //motor, pneumatics, and sensor ports
     public static final int intakeMotorCANID = 7;
+
+    public static final int frontArmForwardPort = 0;
+    public static final int frontArmReversePort = 1;
+    public static final int backArmForwardPort = 2;
+    public static final int backArmReversePort = 3;
+
     public static final int intakeLimitSwitchPort = 0;
     
     //amp limit to determine stall or jam
     public static final double intakeMotorAmpLimit = 35;
 
     //default speed to intake balls
-    public static final double intakeSpeed = -0.4;
+    public static final double intakeSpeed = -0.5;
 
-    //solenoid channel
-    public static final int intakeEngagerChannel = 4;
 
     /** Roulette Storage */
     public static final int rouletteStorageMotorCANID = 8;
-    public static final int preloaderMotorCANID = 9;
-
-    //default preload speed
-    public static final double preloadSpeed = 0.3;
+    
+    //public static final int preloaderMotorCANID = 9;
 
     /** Turret */
+    //motor and pneumatic ports
     public static final int shooterMotorCANID = 10;
     public static final int turretMotorCANID = 11;
     public static final int elevateMotorCANID = 12;
+
+    public static final int shooterEngagerForwardPort = 4;
+    public static final int shooterEngagerReversePort = 5;
 
     //soft max limit
     public static final double maxTurretMotorRotations = 10;
@@ -111,7 +117,11 @@ public final class Constants {
 
 
     /** Contol Panel */
+    //motor and pneumatic ports
     public static final int controlPanelSpinnerCANID = 15;
+ 
+    public static final int spinnerEngagerForwardPort = 6;
+    public static final int spinnerEngagerReversePort = 7;
 
     //number of rotations of the neo 550 with 12:1 gearing and 2.25 in wheel for one panel
     public static final double rotationsPerColorPanel = 200/3;

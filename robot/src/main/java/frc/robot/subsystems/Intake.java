@@ -11,6 +11,8 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -19,7 +21,9 @@ public class Intake extends SubsystemBase {
     CANSparkMax intakeMotor = new CANSparkMax(Constants.intakeMotorCANID, MotorType.kBrushless);
     DigitalInput limitSwitch = new DigitalInput(Constants.intakeLimitSwitchPort);
 
-    
+    DoubleSolenoid frontArm = new DoubleSolenoid(Constants.frontArmForwardPort, Constants.frontArmReversePort);
+    DoubleSolenoid backArm = new DoubleSolenoid(Constants.backArmForwardPort, Constants.backArmReversePort);
+
 
 
   public Intake() {
@@ -35,18 +39,17 @@ public class Intake extends SubsystemBase {
 
   //intake balls at a default speed
   public void intake() {
-      //intakeMotor.set(Constants.intakeSpeed);
+      intakeMotor.set(Constants.intakeSpeed);
   }
 
   //set the speed of the intake
   public void setSpeed(double speed) {
-      //intakeMotor.set(speed);
+      intakeMotor.set(speed);
   }
 
   //get the amp draw
   public double getCurrentDraw() {
-      //return intakeMotor.getOutputCurrent();
-      return 0;
+      return intakeMotor.getOutputCurrent();
   }
 
   /**Ball management methods */
@@ -54,6 +57,26 @@ public class Intake extends SubsystemBase {
   //is the 5th ball detector pressed
   public boolean isLimitPressed() {
       return limitSwitch.get();
+  }
+
+  /**Arm actuators */
+
+  //front arm down
+  public void frontArmDown() {
+    frontArm.set(Value.kForward);
+  }
+  //front arm up
+  public void frontArmUp() {
+    frontArm.set(Value.kReverse);
+  }
+
+  //back arm down
+  public void backArmDown() {
+    backArm.set(Value.kForward);
+  }
+  //back arm up
+  public void backArmUp() {
+    backArm.set(Value.kReverse);
   }
 
 
