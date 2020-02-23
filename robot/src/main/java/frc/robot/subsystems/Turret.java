@@ -32,8 +32,7 @@ public class Turret extends SubsystemBase {
   private CANEncoder elevateEncoder = new CANEncoder(elevateMotor);
 
   //ball into shooter actuator
-  private DoubleSolenoid shooterEngager = new DoubleSolenoid(Constants.shooterEngagerForwardPort, Constants.shooterEngagerReversePort);
-
+private CANSparkMax preloaderMotor = new CANSparkMax(Constants.preloaderMotorCANID, MotorType.kBrushless);
   public Turret() {
     resetShooterEncoder();
     resetTurretEncoder();
@@ -105,12 +104,12 @@ public class Turret extends SubsystemBase {
 
   //activate
   public void engage() {
-    shooterEngager.set(Value.kForward);
+    preloaderMotor.set(1);
   }
 
   //deactivate
   public void disengage() {
-    shooterEngager.set(Value.kReverse);
+    preloaderMotor.set(0);
   }
   
 }

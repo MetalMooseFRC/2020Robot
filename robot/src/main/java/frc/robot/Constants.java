@@ -86,16 +86,14 @@ public final class Constants {
     /** Roulette Storage */
     public static final int rouletteStorageMotorCANID = 8;
     
-    //public static final int preloaderMotorCANID = 9;
-
+   
     /** Turret */
     //motor and pneumatic ports
+    public static final int preloaderMotorCANID = 9;
+
     public static final int shooterMotorCANID = 10;
     public static final int turretMotorCANID = 11;
     public static final int elevateMotorCANID = 12;
-
-    public static final int shooterEngagerForwardPort = 4;
-    public static final int shooterEngagerReversePort = 5;
 
     //soft max limit
     public static final double maxTurretMotorRotations = 10;
