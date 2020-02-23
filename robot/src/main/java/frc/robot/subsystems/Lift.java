@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Lift extends SubsystemBase {
-
+/** 
     //initialize motor ports
     private CANSparkMax rightLifterMotor = new CANSparkMax(Constants.rightLifterMotorCANID, MotorType.kBrushless);
     private CANSparkMax leftLifterMotor = new CANSparkMax(Constants.leftLifterMotorCANID, MotorType.kBrushless);
@@ -35,7 +35,7 @@ public class Lift extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  /**Motor methods */
+  /**Motor methods 
 
   //set the speed of the lifter
   public void setSpeed(double speed) {
@@ -58,7 +58,7 @@ public class Lift extends SubsystemBase {
       rightLifterEncoder.setPosition(0);
       leftLifterEncoder.setPosition(0);
     }
- 
+ */
   
 
 }

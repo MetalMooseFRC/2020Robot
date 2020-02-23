@@ -3,7 +3,6 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
-import frc.robot.subsystems.ColorSensor;
 import frc.robot.subsystems.ControlPanelSpinner;
 
 public class ControlPanelRotationControl extends CommandBase {
@@ -35,13 +34,14 @@ public class ControlPanelRotationControl extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        //return true when the color is correct
+        //return true when the rotations are done
         return Math.abs(rotationsToSpin - m_controlPanel.getPosition()) < Constants.controlPanelPIDErrorMargin;
     }
 
     @Override
     public void end(boolean interrupted) {
-
+        //stop motor
+        m_controlPanel.setSpeed(0);
     }
 
 

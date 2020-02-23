@@ -126,7 +126,7 @@ public final class Constants {
 
     //control panel PID constants
     public static final double controlPanelP = 0.3;
-    public static final double controlPanelI = 0;
+    public static final double controlPanelI = 0.001;
     public static final double controlPanelD = 0;
 
     public static final double controlPanelPIDErrorMargin = 1;

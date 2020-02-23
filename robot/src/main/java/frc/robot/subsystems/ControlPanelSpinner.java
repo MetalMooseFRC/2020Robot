@@ -17,13 +17,13 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class ControlPanelSpinner extends SubsystemBase {
-  
+  /** 
     //initialize ports
     CANSparkMax controlPanelSpinnerMotor = new CANSparkMax(Constants.controlPanelSpinnerCANID, MotorType.kBrushless);
     CANEncoder controlPanelSpinnerEncoder = new CANEncoder(controlPanelSpinnerMotor);
 
     DoubleSolenoid spinnerEngager = new DoubleSolenoid(Constants.spinnerEngagerForwardPort, Constants.spinnerEngagerReversePort);
-
+  */
   public ControlPanelSpinner() {
     resetEncoder();
   }
@@ -37,29 +37,29 @@ public class ControlPanelSpinner extends SubsystemBase {
 
   //set the speed of the motor
   public void setSpeed(double speed) {
-    controlPanelSpinnerMotor.set(speed);
+    //controlPanelSpinnerMotor.set(speed);
   }
 
   //reset encoders
   public void resetEncoder() {
-      controlPanelSpinnerEncoder.setPosition(0);
+      //controlPanelSpinnerEncoder.setPosition(0);
   }
 
   //get position in rotations
   public double getPosition() {
-      return controlPanelSpinnerEncoder.getPosition();
+      return 0;//controlPanelSpinnerEncoder.getPosition();
   }
 
   /**Actuator methods */
   
   //engage spinner
   public void engage() {
-    spinnerEngager.set(Value.kForward);
+    //spinnerEngager.set(Value.kForward);
   }
 
   //disengage spinner
   public void disengage() {
-    spinnerEngager.set(Value.kReverse);
+    //spinnerEngager.set(Value.kReverse);
   }
 
 }

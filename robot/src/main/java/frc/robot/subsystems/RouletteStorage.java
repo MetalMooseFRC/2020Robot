@@ -9,8 +9,6 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -18,7 +16,7 @@ import frc.robot.Constants;
 public class RouletteStorage extends SubsystemBase {
 
     //initialize ports
-    TalonSRX rouletteStorageMotor = new TalonSRX(Constants.rouletteStorageMotorCANID);
+    //TalonSRX rouletteStorageMotor = new TalonSRX(Constants.rouletteStorageMotorCANID);
 
   public RouletteStorage() {
 
@@ -33,12 +31,12 @@ public class RouletteStorage extends SubsystemBase {
 
   //set the speed of the intake
   public void setSpeed(double speed) {
-      rouletteStorageMotor.set(ControlMode.PercentOutput, speed);
+      //rouletteStorageMotor.set(ControlMode.PercentOutput, speed);
   }
 
   //get the amp draw
   public double getCurrentDraw() {
-      return rouletteStorageMotor.getStatorCurrent();
+      return 0;//rouletteStorageMotor.getStatorCurrent();
   }
 
 

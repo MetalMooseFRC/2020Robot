@@ -6,7 +6,6 @@ import java.util.function.DoubleSupplier;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Turret;
-import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Limelight;
 
 public class TurretDefault extends CommandBase {
@@ -52,6 +51,7 @@ public class TurretDefault extends CommandBase {
             //else proportional point to the target
             } else {
                 m_turret.setTurretSpeed(limelight.getTx() * Constants.limelightP);
+                //add turret elevate PID algorithm
             }
 
             if (buttonStatus.getAsBoolean() && Math.abs(m_turret.getSpeed() - Constants.highGoalShooterSpeed) < Constants.shooterSpeedErrorMargin) {
@@ -61,8 +61,8 @@ public class TurretDefault extends CommandBase {
             }
 
         } else {
-            //start spinning to lower speed
-            m_turret.setShooterSpeed(0.5);
+            //continue spinning
+            m_turret.setShooterSpeed(1);
 
             m_turret.setElevateSpeed(joystickY.getAsDouble());
             m_turret.setTurretSpeed(joystickX.getAsDouble());

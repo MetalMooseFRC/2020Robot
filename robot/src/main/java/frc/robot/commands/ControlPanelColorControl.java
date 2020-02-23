@@ -38,12 +38,13 @@ public class ControlPanelColorControl extends CommandBase {
     @Override
     public boolean isFinished() {
         //return true when the color is correct
-        return m_colorSensor.FMSColorCharToNum() == m_colorSensor.getColorNum();
+        return m_colorSensor.FMSColorCharToNum() == m_colorSensor.getColorNum() ;
     }
 
     @Override
     public void end(boolean interrupted) {
-
+        //stop motor
+        m_controlPanel.setSpeed(0);
     }
 
 

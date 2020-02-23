@@ -11,50 +11,50 @@ import java.util.List;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.controller.PIDController;
-import edu.wpi.first.wpilibj.controller.RamseteController;
-import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
-import edu.wpi.first.wpilibj.geometry.Pose2d;
-import edu.wpi.first.wpilibj.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.geometry.Translation2d;
-import edu.wpi.first.wpilibj.trajectory.Trajectory;
-import edu.wpi.first.wpilibj.trajectory.TrajectoryConfig;
-import edu.wpi.first.wpilibj.trajectory.TrajectoryGenerator;
-import edu.wpi.first.wpilibj.trajectory.constraint.DifferentialDriveVoltageConstraint;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
+  // OI controllers
   private static final Joystick driverStick = new Joystick(Constants.driverStickPort);
+  JoystickButton reverseDriveButton;
 
+  // Subsystems
   private Drivetrain m_drivetrain = new Drivetrain();
 
+
+  //Shuffleboard
+  private final SendableChooser<Command> autoChooser = new SendableChooser<>();
 
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
 
+    // Configure Shuffleboard
+    autoChooser.setDefaultOption("Score 3", new InstantCommand());
+    autoChooser.addOption("Cross line", new InstantCommand());
+
     //drive based on joystick axis and customizable sensitivity constants
     m_drivetrain.setDefaultCommand(new DrivetrainDrive(
       () -> applyJoystickDeadBand(-driverStick.getY()) * Constants.joystickSpeedConstant, 
-      () -> applyJoystickDeadBand(-driverStick.getZ()) * Constants.joystickTurnConstant, 
+      () -> applyJoystickDeadBand(-driverStick.getZ()) * Constants.joystickTurnConstant,
+      () -> reverseDriveButton.get(), 
       m_drivetrain));
   }
 
   private void configureButtonBindings() {
-    
+    reverseDriveButton = new JoystickButton(driverStick, 2);
 
   }
 
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-        return new InstantCommand();
+        return autoChooser.getSelected();
   }
 
   //allow for dead areas on the joystick
