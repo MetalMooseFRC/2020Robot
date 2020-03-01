@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -16,7 +17,7 @@ import frc.robot.Constants;
 
 public class Turret extends SubsystemBase {
 
-  
+  /** 
   //shooter wheel motor
   private CANSparkMax shooterMotor = new CANSparkMax(Constants.shooterMotorCANID,MotorType.kBrushless);
   private CANEncoder shooterEncoder = new CANEncoder(shooterMotor);
@@ -28,13 +29,15 @@ public class Turret extends SubsystemBase {
   //elevate motor (shooter pitch)
   private CANSparkMax elevateMotor = new CANSparkMax(Constants.elevateMotorCANID, MotorType.kBrushless);
   private CANEncoder elevateEncoder = new CANEncoder(elevateMotor);
+  */ 
 
   //ball into shooter actuator
 private CANSparkMax preloaderMotor = new CANSparkMax(Constants.preloaderMotorCANID, MotorType.kBrushless);
   public Turret() {
-    resetShooterEncoder();
+    preloaderMotor.setIdleMode(IdleMode.kBrake);
+   /** resetShooterEncoder();
     resetTurretEncoder();
-    resetElevateEncoder();
+    resetElevateEncoder(); */
   }
 
   @Override
@@ -42,7 +45,7 @@ private CANSparkMax preloaderMotor = new CANSparkMax(Constants.preloaderMotorCAN
     // This method will be called once per scheduler run
   }
 
-  /** Shooter motor methods  */
+  /** Shooter motor methods  
 
   //reset encoders to 0
   public void resetShooterEncoder() {
@@ -64,7 +67,7 @@ private CANSparkMax preloaderMotor = new CANSparkMax(Constants.preloaderMotorCAN
     shooterMotor.set(speed);
   }
 
-  /* Turret motor methods */
+  /* Turret motor methods 
 
   //reset turret encoder
   public void resetTurretEncoder() {
@@ -81,8 +84,8 @@ private CANSparkMax preloaderMotor = new CANSparkMax(Constants.preloaderMotorCAN
     return turretEncoder.getPosition();
   }
 
-    /* Elevate motor methods */
-
+    /* Elevate motor methods 
+    
   //reset elevate encoder
   public void resetElevateEncoder() {
     elevateEncoder.setPosition(0);

@@ -18,24 +18,30 @@ public class TurretDefault extends CommandBase {
     BooleanSupplier buttonStatus;
 
 
-    public TurretDefault(Turret m_turret, Limelight limelight, DoubleSupplier joystickX, DoubleSupplier joystickY, BooleanSupplier buttonStatus) {
+    public TurretDefault(Turret m_turret /** , Limelight limelight, DoubleSupplier joystickX, DoubleSupplier joystickY*/, BooleanSupplier buttonStatus) {
         this.m_turret = m_turret;
-        this.limelight = limelight;
+       // this.limelight = limelight;
     
-        this.joystickX = joystickX;
-        this.joystickY = joystickY;
+       // this.joystickX = joystickX;
+        //this.joystickY = joystickY;
         this.buttonStatus = buttonStatus;
 
-        addRequirements(m_turret, limelight);
+        addRequirements(m_turret);//, limelight);
     }
 
     @Override
     public void execute() {
 
+        if (buttonStatus.getAsBoolean()) {
+            m_turret.engage();
+        } else {
+            m_turret.disengage();
+        }
+/** 
         //auto targetting
         if (limelight.hasValidTarget()) {
             //start spinning shooter to full power
-            m_turret.setShooterSpeed(1);
+           m_turret.setShooterSpeed(1);
 
             //if the target cannot be approached because of the hard limit
             if ((m_turret.getTurretPosition() > Constants.maxTurretMotorRotations || m_turret.getTurretPosition() < Constants.minTurretMotorRotations) && Math.abs(limelight.getTx()) > Constants.limelightErrorMargin) {
@@ -72,8 +78,9 @@ public class TurretDefault extends CommandBase {
             } else {
                 m_turret.disengage();
             }
+        
            
-        }
+        } */
 
     }
 }

@@ -19,6 +19,8 @@ import frc.robot.Constants;
 
 public class ColorSensor extends SubsystemBase {
   //Initialize color sensor in roborio port
+
+  /** 
   private ColorSensorV3 colorSensor = new ColorSensorV3(Port.kOnboard);
   private ColorMatch colorMatcher = new ColorMatch();
 
@@ -107,6 +109,6 @@ public class ColorSensor extends SubsystemBase {
     System.out.println("R: " + likelyColor.red);
     System.out.println("G: " + likelyColor.green);
     System.out.println("B: " + likelyColor.blue);
-  }
+  } */
 
 }

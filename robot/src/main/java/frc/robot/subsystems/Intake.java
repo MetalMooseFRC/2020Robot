@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -17,9 +18,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
-  /*  //initialize ports
+  //initialize ports
     CANSparkMax intakeMotor = new CANSparkMax(Constants.intakeMotorCANID, MotorType.kBrushless);
-    DigitalInput limitSwitch = new DigitalInput(Constants.intakeLimitSwitchPort);
+    CANSparkMax storageMotor = new CANSparkMax(Constants.storageMotorCANID, MotorType.kBrushless);
+
+   /** DigitalInput limitSwitch = new DigitalInput(Constants.intakeLimitSwitchPort);
 
      
     DoubleSolenoid frontArm = new DoubleSolenoid(Constants.frontArmForwardPort, Constants.frontArmReversePort);
@@ -28,6 +31,8 @@ public class Intake extends SubsystemBase {
 */
 
   public Intake() {
+    intakeMotor.setIdleMode(IdleMode.kBrake);
+    storageMotor.setIdleMode(IdleMode.kBrake);
 
   }
 
@@ -40,17 +45,25 @@ public class Intake extends SubsystemBase {
 
   //intake balls at a default speed
   public void intake() {
-      //intakeMotor.set(Constants.intakeSpeed);
+      intakeMotor.set(Constants.intakeSpeed);
+      storageMotor.set(Constants.storageSpeed);
+  }
+
+    //outtake balls at a default speed
+    public void outtake() {
+      intakeMotor.set(-Constants.intakeSpeed);
+      storageMotor.set(-Constants.storageSpeed);
   }
 
   //set the speed of the intake
   public void setSpeed(double speed) {
-      //intakeMotor.set(speed);
+      intakeMotor.set(speed);
+      storageMotor.set(speed);
   }
 
   //get the amp draw
   public double getCurrentDraw() {
-      return 0;//intakeMotor.getOutputCurrent();
+      return intakeMotor.getOutputCurrent();
   }
 
   /**Ball management methods */

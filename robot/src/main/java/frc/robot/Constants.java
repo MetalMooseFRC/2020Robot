@@ -77,14 +77,16 @@ public final class Constants {
     public static final int intakeLimitSwitchPort = 0;
     
     //amp limit to determine stall or jam
-    public static final double intakeMotorAmpLimit = 35;
+    public static final double intakeMotorAmpLimit = 60;
 
     //default speed to intake balls
     public static final double intakeSpeed = -0.5;
+    public static final double storageSpeed = -0.25;
 
 
-    /** Roulette Storage */
-    public static final int rouletteStorageMotorCANID = 8;
+
+    /** storage */
+    public static final int storageMotorCANID = 8;
     
    
     /** Turret */

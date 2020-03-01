@@ -26,7 +26,7 @@ public class ControlPanelColorControl extends CommandBase {
        m_controlPanel.resetEncoder();
 
        //get the number of panels needed to shift
-       rotationsToSpin = m_colorSensor.getDistanceToCorrectPanel() * Constants.rotationsPerColorPanel;
+       //rotationsToSpin = m_colorSensor.getDistanceToCorrectPanel() * Constants.rotationsPerColorPanel;
     }
 
     @Override
@@ -38,7 +38,7 @@ public class ControlPanelColorControl extends CommandBase {
     @Override
     public boolean isFinished() {
         //return true when the color is correct
-        return m_colorSensor.FMSColorCharToNum() == m_colorSensor.getColorNum() ;
+        return true; //m_colorSensor.FMSColorCharToNum() == m_colorSensor.getColorNum() ;
     }
 
     @Override

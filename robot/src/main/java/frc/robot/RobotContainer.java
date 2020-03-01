@@ -22,10 +22,12 @@ import frc.robot.subsystems.*;
 public class RobotContainer {
   // OI controllers
   private static final Joystick driverStick = new Joystick(Constants.driverStickPort);
-  JoystickButton reverseDriveButton;
+  JoystickButton reverseDriveButton, intakeButton, shootButton;
 
   // Subsystems
   private Drivetrain m_drivetrain = new Drivetrain();
+  private Intake m_intake = new Intake();
+  private Turret m_turret = new Turret();
 
 
   //Shuffleboard
@@ -45,10 +47,25 @@ public class RobotContainer {
       () -> applyJoystickDeadBand(-driverStick.getZ()) * Constants.joystickTurnConstant,
       () -> reverseDriveButton.get(), 
       m_drivetrain));
+
+    m_intake.setDefaultCommand(new IntakeDefault(
+      m_intake,
+      () -> intakeButton.get()
+    ));
+
+    m_turret.setDefaultCommand(new TurretDefault(
+      m_turret,
+      () -> shootButton.get()
+    ));
+
+
   }
 
   private void configureButtonBindings() {
     reverseDriveButton = new JoystickButton(driverStick, 2);
+    intakeButton = new JoystickButton(driverStick, 12);
+    shootButton = new JoystickButton(driverStick, 11);
+
 
   }
 
