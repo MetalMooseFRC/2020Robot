@@ -30,7 +30,7 @@ PIDController drivePID = new PIDController(Constants.driveAngleP, Constants.driv
     @Override
     public void execute() {
         //calculate PID control based on difference between encoders and distance to travel
-        m_drive.arcadeDrive(0, drivePID.calculate(m_drive.getHeading(), angle));
+        m_drive.arcadeDrive(0, -drivePID.calculate(m_drive.getHeading(), angle));
     }
 
     @Override

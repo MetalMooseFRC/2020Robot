@@ -22,11 +22,16 @@ import com.revrobotics.ColorMatch;
 public final class Constants {
     /**Control System */
     public static final int driverStickPort = 0;
+
+    public static final int operatorPort = 1;
     
     //control and sensitivity constants
     public static final double joystickSpeedConstant = 1.2;
-    public static final double joystickTurnConstant = 1.4;
+    public static final double joystickTurnConstant = 1.2;
     public static final double minimumJoystickInput = 0.1;
+
+    //turret sensitvity
+    public static final double turretSensitivity = 0.45;
     
     /**Drivetrain */
 
@@ -46,20 +51,20 @@ public final class Constants {
     public static final double drivetrainEncoderConversionFactor = Units.inchesToMeters(6 * Math.PI) / 13;
 
     //distance PID constants
-    public static final double driveDistanceP = 0.01;
-    public static final double driveDistanceI = 0;
-    public static final double driveDistanceD = 0;
+    public static  double driveDistanceP = 0.1;
+    public static  double driveDistanceI = 0.01;
+    public static  double driveDistanceD = 0;
 
     //allowed PID error in meters
     public static final double driveDistancePIDErrorMargin = 0.05;
 
     //distance PID constants
-    public static final double driveAngleP = 0.05;
-    public static final double driveAngleI = 0;
-    public static final double driveAngleD = 0;
+    public static  double driveAngleP = 0.01;
+    public static  double driveAngleI = 0.001;
+    public static  double driveAngleD = 0;
 
     //allowed PID error in degrees
-    public static final double driveAnglePIDErrorMargin = 2;
+    public static final double driveAnglePIDErrorMargin = 3;
 
     //default speed of drivetrain for auto
     public static final double defaultAutoSpeed = 0.6;
@@ -95,7 +100,7 @@ public final class Constants {
 
     public static final int shooterMotorCANID = 10;
     public static final int turretMotorCANID = 11;
-    public static final int elevateMotorCANID = 12;
+    public static final int hoodMotorCANID = 12;
 
     //soft max limit
     public static final double maxTurretMotorRotations = 10;
@@ -103,11 +108,23 @@ public final class Constants {
     public static final double minTurretMotorRotations = -10;
 
     //shooter speeds in rpm
-    public static final double highGoalShooterSpeed = 200;
+    public static final double highGoalShooterSpeed = 5000;
     public static final double lowGoalShooterSpeed = 100;
+
+    //setpoints no flywheels
+    public static final double trenchEndHoodCount = -27.595;
 
     //shooter speed margin
     public static final double shooterSpeedErrorMargin = 1;
+
+    //PID hood
+    public static double hoodPositionP = 0.03;
+    public static double hoodPositionI = 0.02;
+    public static double hoodPositionD = 0;
+    
+    public static double hoodSoftLimit = -50.48;
+
+    public static double hoodPositionErrorMargin = 0.1;
 
     /** Lift */
 

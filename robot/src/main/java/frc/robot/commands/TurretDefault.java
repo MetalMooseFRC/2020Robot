@@ -15,24 +15,51 @@ public class TurretDefault extends CommandBase {
 
     DoubleSupplier joystickX;
     DoubleSupplier joystickY;
-    BooleanSupplier buttonStatus;
+    DoubleSupplier joystickSlider;
+    DoubleSupplier trigger;
+
+    double hoodP = 0.08;
 
 
-    public TurretDefault(Turret m_turret /** , Limelight limelight, DoubleSupplier joystickX, DoubleSupplier joystickY*/, BooleanSupplier buttonStatus) {
+    public TurretDefault(Turret m_turret, Limelight limelight, DoubleSupplier joystickX, DoubleSupplier joystickY , DoubleSupplier joystickSlider, DoubleSupplier trigger) {
         this.m_turret = m_turret;
-       // this.limelight = limelight;
+        this.limelight = limelight;
     
-       // this.joystickX = joystickX;
-        //this.joystickY = joystickY;
-        this.buttonStatus = buttonStatus;
+        this.joystickX = joystickX;
+        this.joystickY = joystickY;
+        this.joystickSlider = joystickSlider;
+        this.trigger = trigger;
 
-        addRequirements(m_turret);//, limelight);
+        addRequirements(m_turret, limelight);
     }
 
     @Override
     public void execute() {
 
-        if (buttonStatus.getAsBoolean()) {
+        m_turret.setShooterSpeed((-joystickSlider.getAsDouble() + 1)/2);
+
+        double hoodSpeed = joystickY.getAsDouble();
+        double turretSpeed = joystickX.getAsDouble();
+
+        System.out.println("Hood count: " + m_turret.getHoodPosition());
+        System.out.println("Dist " + limelight.getDistance());
+
+        //if no target use joystick
+        if (!limelight.hasValidTarget()) {
+            if (Math.abs(hoodSpeed) < Constants.minimumJoystickInput) hoodSpeed = 0;
+            if (Math.abs(turretSpeed) < Constants.minimumJoystickInput) turretSpeed = 0;
+    
+            if (m_turret.getHoodPosition() > -Constants.hoodPositionErrorMargin && hoodSpeed > 0) hoodSpeed = 0;
+            if (Constants.hoodSoftLimit - m_turret.getHoodPosition() > -Constants.hoodPositionErrorMargin && hoodSpeed < 0) hoodSpeed = 0;
+            m_turret.setHoodSpeed(hoodSpeed * Constants.turretSensitivity);
+            m_turret.setTurretSpeed(turretSpeed * Constants.turretSensitivity);
+        } else {
+            double targetHoodPos =limelight.getDistance() * -0.0364553 - 13.7447;
+            m_turret.setHoodSpeed((targetHoodPos - m_turret.getHoodPosition()) * hoodP + 0.01);
+        }
+
+
+        if (trigger.getAsDouble() > Constants.minimumJoystickInput) {
             m_turret.engage();
         } else {
             m_turret.disengage();

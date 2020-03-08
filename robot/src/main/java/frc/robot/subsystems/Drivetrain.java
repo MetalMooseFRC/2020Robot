@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.SPI.Port;
@@ -65,6 +66,14 @@ public class Drivetrain extends SubsystemBase {
     topLeftMotor.follow(frontLeftMotor);
     backLeftMotor.follow(frontLeftMotor);
 
+    //set idle mode
+    topLeftMotor.setIdleMode(IdleMode.kBrake);
+    topRightMotor.setIdleMode(IdleMode.kBrake);
+    frontLeftMotor.setIdleMode(IdleMode.kBrake);
+    frontRightMotor.setIdleMode(IdleMode.kBrake);
+    backLeftMotor.setIdleMode(IdleMode.kBrake);
+    backRightMotor.setIdleMode(IdleMode.kBrake);
+
     //initialize odometry
     driveOdometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(getHeading()));
   }
@@ -74,7 +83,6 @@ public class Drivetrain extends SubsystemBase {
     // This method will be called once per scheduler run
     driveOdometry.update(Rotation2d.fromDegrees(getHeading()), getLeftSpeed(), getRightSpeed());
 
-    System.out.println("Yaw " + getHeading());
   }
 
  /* Drive methods*/

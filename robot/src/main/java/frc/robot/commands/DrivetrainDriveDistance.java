@@ -40,7 +40,9 @@ PIDController drivePID = new PIDController(Constants.driveDistanceP, Constants.d
     @Override
     public void execute() {
         //calculate PID control based on difference between encoders and distance to travel
-        m_drive.arcadeDrive(drivePID.calculate(m_drive.getAverageDistance(), distance), 0);
+        m_drive.arcadeDrive(drivePID.calculate(m_drive.getLeftEncoder(), distance), 0);
+
+        System.out.println(drivePID.getPositionError());
     }
 
     @Override

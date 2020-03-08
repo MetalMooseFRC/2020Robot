@@ -17,27 +17,34 @@ import frc.robot.Constants;
 
 public class Turret extends SubsystemBase {
 
-  /** 
+   
   //shooter wheel motor
   private CANSparkMax shooterMotor = new CANSparkMax(Constants.shooterMotorCANID,MotorType.kBrushless);
   private CANEncoder shooterEncoder = new CANEncoder(shooterMotor);
 
+   
   //turret motor (shooter yaw)
   private CANSparkMax turretMotor = new CANSparkMax(Constants.turretMotorCANID, MotorType.kBrushless);
   private CANEncoder turretEncoder = new CANEncoder(turretMotor);
 
-  //elevate motor (shooter pitch)
-  private CANSparkMax elevateMotor = new CANSparkMax(Constants.elevateMotorCANID, MotorType.kBrushless);
-  private CANEncoder elevateEncoder = new CANEncoder(elevateMotor);
-  */ 
+  //hood motor (shooter pitch)
+  private CANSparkMax hoodMotor = new CANSparkMax(Constants.hoodMotorCANID, MotorType.kBrushless);
+  private CANEncoder hoodEncoder = new CANEncoder(hoodMotor);
+  
 
   //ball into shooter actuator
 private CANSparkMax preloaderMotor = new CANSparkMax(Constants.preloaderMotorCANID, MotorType.kBrushless);
   public Turret() {
     preloaderMotor.setIdleMode(IdleMode.kBrake);
-   /** resetShooterEncoder();
+    resetShooterEncoder();
     resetTurretEncoder();
-    resetElevateEncoder(); */
+    resetHoodEncoder(); 
+    
+    shooterMotor.setIdleMode(IdleMode.kCoast);
+    turretMotor.setIdleMode(IdleMode.kBrake);
+    hoodMotor.setIdleMode(IdleMode.kBrake);
+
+    
   }
 
   @Override
@@ -45,7 +52,7 @@ private CANSparkMax preloaderMotor = new CANSparkMax(Constants.preloaderMotorCAN
     // This method will be called once per scheduler run
   }
 
-  /** Shooter motor methods  
+  /** Shooter motor methods  */
 
   //reset encoders to 0
   public void resetShooterEncoder() {
@@ -67,7 +74,7 @@ private CANSparkMax preloaderMotor = new CANSparkMax(Constants.preloaderMotorCAN
     shooterMotor.set(speed);
   }
 
-  /* Turret motor methods 
+  /* Turret motor methods */
 
   //reset turret encoder
   public void resetTurretEncoder() {
@@ -84,21 +91,21 @@ private CANSparkMax preloaderMotor = new CANSparkMax(Constants.preloaderMotorCAN
     return turretEncoder.getPosition();
   }
 
-    /* Elevate motor methods 
+    /* hood motor methods */
     
-  //reset elevate encoder
-  public void resetElevateEncoder() {
-    elevateEncoder.setPosition(0);
+  //reset hood encoder
+  public void resetHoodEncoder() {
+    hoodEncoder.setPosition(0);
   }
 
   //set speed
-  public void setElevateSpeed(double speed) {
-    elevateMotor.set(speed);
+  public void setHoodSpeed(double speed) {
+    hoodMotor.set(speed);
   }
 
   //get position in rotation
-  public double getElevatePosition() {
-    return elevateEncoder.getPosition();
+  public double getHoodPosition() {
+    return hoodEncoder.getPosition();
   }
 
   /** Engager actuator methods */

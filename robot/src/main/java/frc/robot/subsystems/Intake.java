@@ -24,11 +24,9 @@ public class Intake extends SubsystemBase {
 
    /** DigitalInput limitSwitch = new DigitalInput(Constants.intakeLimitSwitchPort);
 
-     
+     */
     DoubleSolenoid frontArm = new DoubleSolenoid(Constants.frontArmForwardPort, Constants.frontArmReversePort);
-    DoubleSolenoid backArm = new DoubleSolenoid(Constants.backArmForwardPort, Constants.backArmReversePort);
-
-*/
+    //DoubleSolenoid backArm = new DoubleSolenoid(Constants.backArmForwardPort, Constants.backArmReversePort);
 
   public Intake() {
     intakeMotor.setIdleMode(IdleMode.kBrake);
@@ -77,11 +75,11 @@ public class Intake extends SubsystemBase {
 
   //front arm down
   public void frontArmDown() {
-    //frontArm.set(Value.kForward);
+    frontArm.set(Value.kForward);
   }
   //front arm up
   public void frontArmUp() {
-    //frontArm.set(Value.kReverse);
+    frontArm.set(Value.kReverse);
   }
 
   //back arm down

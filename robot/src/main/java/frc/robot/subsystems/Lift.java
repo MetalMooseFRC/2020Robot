@@ -28,6 +28,10 @@ public class Lift extends SubsystemBase {
   public Lift() {
     //reset encoders
     resetEncoders();
+
+    //set idle mode
+    rightLifterMotor.setIdleMode(IdleMode.kBrake);
+    leftLifterMotor.setIdleMode(IdleMode.kBrake);
   }
 
   @Override
